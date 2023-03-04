@@ -31,13 +31,12 @@ elif opt.model == "ADDA":
     from model.model import ADDA as Model
 elif opt.model == "MDD":
     from model.model import MDD as Model 
-model = Model(opt).to(opt.device) # .double()
+model = Model(opt).to(opt.device)
 
 data_source = opt.dataset
 
 # load the data
 from dataset.dataset import *
-# data_source = 'data/toy_d15_quarter.pkl'
 
 data_source = opt.dataset
 
@@ -45,13 +44,6 @@ with open(data_source, "rb") as data_file:
     data_pkl = pickle.load(data_file)
 print(f"Data: {data_pkl['data'].shape}\nLabel: {data_pkl['label'].shape}")
 
-
-
-# for test cida only:
-# angle = data_pkl['angle']
-# angle_mean = angle.mean(0, keepdims=True)
-# angle_std = angle.std(0, keepdims=True)
-# opt.angle = (angle - angle_mean) / angle_std
 try:
     opt.angle = data_pkl['angle']
 except:
@@ -63,7 +55,6 @@ data_std = data.std(0, keepdims=True)
 data_pkl['data'] = (data - data_mean) / data_std  # normalize the raw data
 datasets = [ToyDataset(data_pkl, i, opt) for i in range(opt.num_domain)]  # sub dataset for each domain
 
-# TODO: the problem is that, the toy dataset doesn't random shuffle!
 dataset = SeqToyDataset(datasets, size=len(datasets[0]))  # mix sub dataset to a large one
 dataloader = DataLoader(
     dataset=dataset,
