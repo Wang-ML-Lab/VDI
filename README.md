@@ -16,6 +16,20 @@ Previous studies have shown that leveraging domain index can significantly boost
 ## More Visualization of Inferred Domain Indices
 
 ## Quantitative Result
+#### Toy Dataset: DG-15 and DG-60
+<p align="center">
+<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/dg_15_60_quantitive_result.jpg" width="75%"/>
+</p>
+
+#### TPT-48
+<p align="center">
+<img src="fig/tpt_48_quantitive_result.jpg" alt="" data-canonical-src="fig/tpt_48_quantitive_result.jpg" width="95%"/>
+</p>
+
+#### CompCars
+<p align="center">
+<img src="fig/compcar_quantitive_result.jpg" alt="" data-canonical-src="fig/compcar_quantitive_result.jpg" width="80%"/>
+</p>
 
 ## Theory (Informal)
 
