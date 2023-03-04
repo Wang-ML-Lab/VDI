@@ -19,7 +19,7 @@ Hao Wang*, Hao He*, Dina Katabi<br>
 [[Paper](http://wanghao.in/paper/ICML20_CIDA.pdf)] [[Code](https://github.com/hehaodele/CIDA)] [[Talk](https://www.youtube.com/watch?v=KtZPSCD-WhQ)] [[Blog](http://wanghao.in/CIDA-Blog/CIDA.html)] [[Slides](http://wanghao.in/slides/CIDA_slides.pptx)]
 
 ## Reference
-[Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation](https://arxiv.org/abs/2302.02561))
+[Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation](https://arxiv.org/abs/2302.02561)
 ```bib
 @inproceedings{VDI,
   title={Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation},
