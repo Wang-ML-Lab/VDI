@@ -18,7 +18,7 @@ Previous studies have shown that leveraging domain index can significantly boost
 ## Quantitative Result
 #### Toy Dataset: DG-15 and DG-60
 <p align="center">
-<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/dg_15_60_quantitive_result.jpg" width="75%"/>
+<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/dg_15_60_quantitive_result.jpg" width="80%"/>
 </p>
 
 #### TPT-48
