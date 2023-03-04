@@ -6,7 +6,20 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 [[Paper](https://arxiv.org/abs/2302.02561)]
 
 ## Brief Introduction for VDI
-Previous studies have shown that leveraging domain index can significantly boost domain adaptation performance [[1](#paper_1),[2](#paper_2)]. However, such domain indices are not always available. VDI is the framework that address this challenge. To achieve this goal, we first provide a formal definition of domain index from the probabilistic perspective, and then propose an adversarial variational Bayesian framework that infers domain indices from multi-domain data, thereby providing additional insight on domain relations and improving domain adaptation performance. Our theoretical analysis shows that our adversarial variational Bayesian framework finds the optimal domain index at equilibrium. Empirical results on both synthetic and real data verify that our model can produce interpretable domain indices which enable us to achieve superior performance compared to state-of-the-art domain adaptation methods.
+Previous studies have shown that leveraging domain index can significantly boost domain adaptation performance [[1](#paper_1),[2](#paper_2)]. However, such domain indices are not always available. VDI is the model that aims to address this challenge. To achieve this goal, we first provide a formal definition of domain index from the probabilistic perspective, and then propose an adversarial variational Bayesian framework that infers domain indices from multi-domain data, thereby providing additional insight on domain relations and improving domain adaptation performance. Our theoretical analysis shows that our adversarial variational Bayesian framework finds the optimal domain index at equilibrium. Empirical results on both synthetic and real data verify that our model can produce interpretable domain indices which enable us to achieve superior performance compared to state-of-the-art domain adaptation methods.
+
+## Sample Visualization of Inferred Domain Indices
+
+## Method Overview
+
+## More Visualization of Inferred Domain Indices
+
+## Quantitative Result
+
+## Theory (Informal)
+
+## How to train VDI, and how to visualize domain indices?
+In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
 
 ## Also Check Our Relevant Work
 <span id="paper_1">[1] **Graph-Relational Domain Adaptation**<br></span>
