@@ -64,16 +64,16 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 #### Circles
 Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices for dataset *Circle*. VDI's inferred indices have a correlation of 0.97 with true indices.
 <p align="center">
-<img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="65%"/>
+<img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="45%"/>
 </p>
 
 #### CompCars
 Inferred domain indices for 30 domains in *CompCars*. We color inferred domain indices according to ground-truth indices, viewpoints (**first**) and YOMs (**second**). Observations are consistent with intuition: (1) domains with the same viewpoint or YOM have similar domain indices; (2) domains with "front-side" and "rear-side" viewpoints have similar domain indices; (3) domains with "front" and "rear" viewpoints have similar domain indices.
 <p align="center">
-<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="70%"/>
+<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="72%"/>
 </p>
 <p align="center">
-<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="70%"/>
+<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="65%"/>
 </p>
 
 #### DG-15
