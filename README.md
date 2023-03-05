@@ -13,7 +13,7 @@ Previous studies have shown that leveraging domain index can significantly boost
 Below are inferred domain indices for $48$ domains in \emph{TPT-48}. We color inferred domain indices according to ground-truth indices, latitude (**left**) and longitude (**right**). VDI's inferred indices are correlated with true indices, even though *VDI does not have access to true indices during training*.
 
 <p align="center">
-<img src="fig/GRDA-DG-15-results.png" alt="" data-canonical-src="fig/visualize_tpt_48.jpg" width="91%"/>
+<img src="fig/visualize_tpt_48.jpg" alt="" data-canonical-src="fig/visualize_tpt_48.jpg" width="91%"/>
 </p>
 
 ## Domain Index Definition (Informal)
@@ -26,7 +26,7 @@ Below are inferred domain indices for $48$ domains in \emph{TPT-48}. We color in
 ## Quantitative Result
 #### Toy Dataset: Circle, DG-15 and DG-60
 <p align="center">
-<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/dg_15_60_quantitive_result.jpg" width="80%"/>
+<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/toy_quantitive_result.jpg.jpg" width="80%"/>
 </p>
 
 #### TPT-48
