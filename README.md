@@ -71,7 +71,7 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 <img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="72%"/>
 </p>
 <p align="center">
-<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="63%"/>
+<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="65%"/>
 </p>
 
 #### DG-15
