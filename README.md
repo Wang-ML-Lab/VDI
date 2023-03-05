@@ -61,18 +61,20 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 </p>
 
 ## More Visualization of Inferred Domain Indices
+#### Circles
 <p align="center">
-<img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="80%"/>
+<img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="65%"/>
 </p>
 
+#### CompCars
 <p align="center">
-<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="80%"/>
+<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="70%"/>
+</p>
+<p align="center">
+<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="70%"/>
 </p>
 
-<p align="center">
-<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="80%"/>
-</p>
-
+#### DG-15
 <p align="center">
 <img src="fig/dg15_graph.jpg" alt="" data-canonical-src="fig/dg15_graph.jpg" width="80%"/>
 </p>
