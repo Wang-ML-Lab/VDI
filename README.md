@@ -11,6 +11,9 @@ Previous studies have shown that leveraging domain index can significantly boost
 
 ## Sample Visualization of Inferred Domain Indices
 
+## Domain Index Definition (Informal)
+
+
 ## Method Overview
 
 ## More Visualization of Inferred Domain Indices
@@ -32,6 +35,7 @@ Previous studies have shown that leveraging domain index can significantly boost
 </p>
 
 ## Theory (Informal)
+
 
 ## How to train VDI, and how to visualize domain indices?
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
