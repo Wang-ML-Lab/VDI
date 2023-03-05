@@ -28,14 +28,14 @@ Below are inferred domain indices for $48$ domains in *TPT-48*. We color inferre
 </p>
 We could see that VDI's inferred domain indices are highly correlated with each domain's latitude and longitude. For example, Florida (FL) has the lowest latitude among all 48 states and is hence the left-most circle in the left figure.
 
-## Domain Index Definition (Informal)
-We require domain index:
-* Be independent of the data's encoding (Domain-Invariant).
-* Retains as much information on the data as possible.
-* Maximizes adaptation performance.
+## Domain Index Definition (Informal, See Formal Definition in the Paper)
+We require the domain index to:
+* Be independent of the data's encoding (i.e., domain-invariant encoding).
+* Retain as much information on the data as possible.
+* Maximize adaptation performance.
 
 ## Method Overview
-We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
+We propose a Hierarchical Bayesian Deep Learning model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
 <p align="center">
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
@@ -106,7 +106,7 @@ Hao Wang*, Hao He*, Dina Katabi<br>
 ```bib
 @inproceedings{VDI,
   title={Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation},
-  author={Xu, Zihao and Hao Guang-Yuan and He, Hao and Wang, Hao},
+  author={Xu, Zihao and Hao, Guang-Yuan and He, Hao and Wang, Hao},
   booktitle={International Conference on Learning Representations},
   year={2023}
 }
