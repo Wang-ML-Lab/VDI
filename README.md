@@ -61,7 +61,7 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 </p>
 
 ## More Visualization of Inferred Domain Indices
-#### Circles
+#### Circle
 Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices for dataset *Circle*. VDI's inferred indices have a correlation of **0.97** with true indices.
 <p align="center">
 <img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="45%"/>
