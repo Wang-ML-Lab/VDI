@@ -7,7 +7,10 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 
 ## Outline for This README
 * [Brief Introduction for VDI](#brief-introduction-for-vdi)
-
+* [Sample Visualization of Inferred Domain Indices](#sample-visualization-of-inferred-domain-indices)
+* [Domain Index Definition (Informal)](#domain-index-definition-informal)
+* [Method Overview](#method-overview)
+* [Quantitative Result](#quantitative-result)
 
 ## Brief Introduction for VDI
 Previous studies have shown that leveraging domain index can significantly boost domain adaptation performance [[1](#paper_1),[2](#paper_2)]. However, such domain indices are not always available. VDI is the model that aims to address this challenge. To achieve this goal, we first formally define the "domain index" from the probabilistic perspective, and then **infers** domain indices from multi-domain data, with an **adversarial variational Bayesian framework**. These domain indice provide additional insight on domain relations and improve domain adaptation performance. Our theoretical analysis shows that VDI finds the optimal domain index at equilibrium.
