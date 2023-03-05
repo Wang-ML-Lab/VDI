@@ -71,11 +71,7 @@ Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices
 #### CompCars
 Inferred domain indices for 30 domains in *CompCars*. We color inferred domain indices according to ground-truth indices, viewpoints (**first**) and YOMs (**second**). Observations are consistent with intuition: (1) domains with the same viewpoint or YOM have similar domain indices; (2) domains with "front-side" and "rear-side" viewpoints have similar domain indices; (3) domains with "front" and "rear" viewpoints have similar domain indices.
 <p align="center">
-<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="72%"/>
-</p>
-<p align="center">
-<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="65%"/>
-</p>
+<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="72%"/><img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="65%"/>
 
 #### DG-15
 **Left:** *Ground-truth* domain graph for **DG-15**. We use 'red' and 'blue' to roughly indicate positive and negative data points in a domain. **Right:** VDI's *inferred* domain graph for *DG-15*, with an AUC of **0.83**.
