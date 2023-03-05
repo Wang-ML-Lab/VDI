@@ -30,6 +30,14 @@ We require domain index:
 * Maximizes adaptation performance.
 
 ## Method Overview
+We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
+<p align="center">
+<img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="95%"/>
+</p>
+We found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal). This gives rise to our final network structure shown below.
+<p align="center">
+<img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="95%"/>
+</p>
 
 ## Quantitative Result
 #### Toy Dataset: Circle, DG-15 and DG-60
@@ -48,9 +56,6 @@ We require domain index:
 </p>
 
 ## More Visualization of Inferred Domain Indices
-
-## Theory (Informal)
-We could learn domain indices that satisfies previous definition when global optimal of our objective function is achieved.
 
 ## Installation
     conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
