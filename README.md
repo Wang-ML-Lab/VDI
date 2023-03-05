@@ -83,7 +83,7 @@ Inferred domain indices for 30 domains in *CompCars*. We color inferred domain i
 </p>
 
 ## Installation
-    conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
+    conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
     pip install -r requirements.txt
 
 ## Training/Visualizing Steps
