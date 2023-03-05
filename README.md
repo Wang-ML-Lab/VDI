@@ -39,7 +39,7 @@ We propose a Hierarchical Bayes model for domain index inference, which is shown
 <p align="center">
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
-Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#def). This gives rise to our final network structure shown below.
+Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal). This gives rise to our final network structure shown below.
 <p align="center">
 <img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="89%"/>
 </p>
@@ -62,7 +62,7 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 
 ## More Visualization of Inferred Domain Indices
 #### Circles
-Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices for dataset *Circle*. VDI's inferred indices have a correlation of 0.97 with true indices.
+Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices for dataset *Circle*. VDI's inferred indices have a correlation of **0.97** with true indices.
 <p align="center">
 <img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="45%"/>
 </p>
