@@ -33,7 +33,6 @@ We require domain index:
 * Be independent of the data's encoding (Domain-Invariant).
 * Retains as much information on the data as possible.
 * Maximizes adaptation performance.
-[Test](#reference)
 
 ## Method Overview
 We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
