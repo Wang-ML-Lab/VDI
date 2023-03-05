@@ -37,8 +37,8 @@ Previous studies have shown that leveraging domain index can significantly boost
 ## Theory (Informal)
 
 ## Installation
-  conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
-  pip install -r requirements.txt
+    conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
+    pip install -r requirements.txt
 
 ## How to train VDI, and how to visualize domain indices?
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
