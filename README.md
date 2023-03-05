@@ -77,7 +77,7 @@ Inferred domain indices for 30 domains in *CompCars*. We color inferred domain i
 </p>
 
 #### DG-15
-**Left:** *Ground-truth* domain graph for **DG-15**. We use 'red' and 'blue' to roughly indicate positive and negative data points in a domain. **Right:** VDI's *inferred* domain graph for *DG-15*, with an AUC of 0.83.
+**Left:** *Ground-truth* domain graph for **DG-15**. We use 'red' and 'blue' to roughly indicate positive and negative data points in a domain. **Right:** VDI's *inferred* domain graph for *DG-15*, with an AUC of **0.83**.
 <p align="center">
 <img src="fig/dg15_graph.jpg" alt="" data-canonical-src="fig/dg15_graph.jpg" width="80%"/>
 </p>
