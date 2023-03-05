@@ -62,11 +62,13 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 
 ## More Visualization of Inferred Domain Indices
 #### Circles
+Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices for dataset *Circle*. VDI's inferred indices have a correlation of 0.97 with true indices.
 <p align="center">
 <img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="65%"/>
 </p>
 
 #### CompCars
+Inferred domain indices for 30 domains in *CompCars*. We color inferred domain indices according to ground-truth indices, viewpoints (**first**) and YOMs (**second**). Observations are consistent with intuition: (1) domains with the same viewpoint or YOM have similar domain indices; (2) domains with "front-side" and "rear-side" viewpoints have similar domain indices; (3) domains with "front" and "rear" viewpoints have similar domain indices.
 <p align="center">
 <img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="70%"/>
 </p>
@@ -75,6 +77,7 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 </p>
 
 #### DG-15
+**Left:** *Ground-truth* domain graph for **DG-15**. We use 'red' and 'blue' to roughly indicate positive and negative data points in a domain. **Right:** VDI's *inferred* domain graph for *DG-15*, with an AUC of 0.83.
 <p align="center">
 <img src="fig/dg15_graph.jpg" alt="" data-canonical-src="fig/dg15_graph.jpg" width="80%"/>
 </p>
