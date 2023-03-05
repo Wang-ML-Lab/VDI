@@ -28,7 +28,7 @@ Below are inferred domain indices for $48$ domains in *TPT-48*. We color inferre
 </p>
 We could see that VDI's inferred domain indices are highly correlated with each domain's latitude and longitude. For example, Florida (FL) has the lowest latitude among all 48 states and is hence the left-most circle in the left figure.
 
-## <span id="def">Domain Index Definition (Informal)<br></span>
+## Domain Index Definition (Informal)
 We require domain index:
 * Be independent of the data's encoding (Domain-Invariant).
 * Retains as much information on the data as possible.
@@ -37,18 +37,17 @@ We require domain index:
 ## Method Overview
 We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
 <p align="center">
-<img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="80%"/>
+<img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="89%"/>
 </p>
-
-We found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#def). This gives rise to our final network structure shown below.
+Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal). This gives rise to our final network structure shown below.
 <p align="center">
-<img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="80%"/>
+<img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="89%"/>
 </p>
 
 ## Quantitative Result
 #### Toy Dataset: Circle, DG-15 and DG-60
 <p align="center">
-<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/toy_quantitive_result.jpg.jpg" width="80%"/>
+<img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/toy_quantitive_result.jpg" width="80%"/>
 </p>
 
 #### TPT-48
@@ -62,6 +61,21 @@ We found that **maximizing our model's evidence lower bound** while **adversaria
 </p>
 
 ## More Visualization of Inferred Domain Indices
+<p align="center">
+<img src="fig/visualize_circle.jpg" alt="" data-canonical-src="fig/visualize_circle.jpg" width="80%"/>
+</p>
+
+<p align="center">
+<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="80%"/>
+</p>
+
+<p align="center">
+<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="80%"/>
+</p>
+
+<p align="center">
+<img src="fig/dg15_graph.jpg" alt="" data-canonical-src="fig/dg15_graph.jpg" width="80%"/>
+</p>
 
 ## Installation
     conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
