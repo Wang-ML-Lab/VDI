@@ -24,8 +24,6 @@ We require domain index:
 
 ## Method Overview
 
-## More Visualization of Inferred Domain Indices
-
 ## Quantitative Result
 #### Toy Dataset: Circle, DG-15 and DG-60
 <p align="center">
@@ -42,7 +40,10 @@ We require domain index:
 <img src="fig/compcar_quantitive_result.jpg" alt="" data-canonical-src="fig/compcar_quantitive_result.jpg" width="80%"/>
 </p>
 
+## More Visualization of Inferred Domain Indices
+
 ## Theory (Informal)
+We could learn domain indices that satisfies previous definition when global optimal of our objective function is achieved.
 
 ## Installation
     conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
