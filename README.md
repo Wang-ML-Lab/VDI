@@ -40,6 +40,7 @@ We propose a Hierarchical Bayes model for domain index inference, which is shown
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
 Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the. This gives rise to our final network structure shown below.
+
 [Test](#domain-index-definition-informal)
 <p align="center">
 <img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="89%"/>
