@@ -13,7 +13,7 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 * [Quantitative Result](#quantitative-result)
 * [More Visualization of Inferred Domain Indices](#more-visualization-of-inferred-domain-indices)
 * [Installation](#installation)
-* [Training/Visualizing Steps](#training/visualizing-steps)
+* [Training/Visualizing Steps](#trainingvisualizing-steps)
 * [Related Works](#also-check-our-relevant-work)
 * [Reference](#reference)
 
