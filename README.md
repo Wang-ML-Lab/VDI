@@ -17,7 +17,10 @@ Below are inferred domain indices for $48$ domains in *TPT-48*. We color inferre
 We could see that VDI's inferred domain indices are highly correlated with each domain's latitude and longitude. For example, Florida (FL) has the lowest latitude among all 48 states and is hence the left-most circle in the left figure.
 
 ## Domain Index Definition (Informal)
-
+We require domain index:
+* Be independent of the data's encoding (Domain-Invariant).
+* Retains as much information on the data as possible.
+* Maximizes adaptation performance.
 
 ## Method Overview
 
