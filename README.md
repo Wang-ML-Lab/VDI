@@ -73,7 +73,7 @@ Inferred domain indices for 30 domains in *CompCars*. We color inferred domain i
 <p align="center">
   <img alt="Light" src="fig/visualize_compcar_view.jpg" width="50%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="fig/visualize_compcar_YOM.jpg" width="44%">
+  <img alt="Dark" src="fig/visualize_compcar_YOM.jpg" width="45%">
 </p>
 <!-- <p align="center">
 <img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="35%"/>
