@@ -10,6 +10,11 @@ Previous studies have shown that leveraging domain index can significantly boost
 <!-- Empirical results on both synthetic and real data verify that VDI can produce interpretable domain indices which enable us to achieve superior performance compared to state-of-the-art domain adaptation methods. -->
 
 ## Sample Visualization of Inferred Domain Indices
+Below are inferred domain indices for $48$ domains in \emph{TPT-48}. We color inferred domain indices according to ground-truth indices, latitude (**left**) and longitude (**right**). VDI's inferred indices are correlated with true indices, even though *VDI does not have access to true indices during training*.
+
+<p align="center">
+<img src="fig/GRDA-DG-15-results.png" alt="" data-canonical-src="fig/visualize_tpt_48.jpg" width="91%"/>
+</p>
 
 ## Domain Index Definition (Informal)
 
