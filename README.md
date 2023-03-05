@@ -37,7 +37,7 @@ We require domain index:
 ## Method Overview
 We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
 <p align="center">
-<img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="80%"/>
+<img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
 Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal). This gives rise to our final network structure shown below.
 <p align="center">
