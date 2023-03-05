@@ -23,7 +23,7 @@ Below are inferred domain indices for $48$ domains in *TPT-48*. We color inferre
 </p>
 We could see that VDI's inferred domain indices are highly correlated with each domain's latitude and longitude. For example, Florida (FL) has the lowest latitude among all 48 states and is hence the left-most circle in the left figure.
 
-## Domain Index Definition (Informal)
+## <span id="def">Domain Index Definition (Informal)<br></span>
 We require domain index:
 * Be independent of the data's encoding (Domain-Invariant).
 * Retains as much information on the data as possible.
@@ -35,7 +35,7 @@ We propose a Hierarchical Bayes model for domain index inference, which is shown
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="80%"/>
 </p>
 
-We found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the . This gives rise to our final network structure shown below.
+We found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#def). This gives rise to our final network structure shown below.
 <p align="center">
 <img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="80%"/>
 </p>
