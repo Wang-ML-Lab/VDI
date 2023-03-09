@@ -1,18 +1,27 @@
 import os
-from statistics import mode
-from easydict import EasyDict
-import matplotlib.pyplot as plt
 import torch
 import numpy as np
 import random
 import pickle
+import argparse
+import importlib.util
 
 # from configs.config_15 import opt
 # from configs.config_30 import opt
 # from configs.config_60 import opt
-from configs.config_15_random import opt
+# from configs.config_15_random import opt
 # from configs.config_60_random import opt
 # from configs.config_60_random_pi import opt
+
+# loading the config files
+parser = argparse.ArgumentParser(description='Choose the configs to run.')
+parser.add_argument('--config', type=str, required=True)
+args = parser.parse_args()
+
+use_config_spec = importlib.util.spec_from_file_location(args.config,"configs/{}.py".format(args.config))
+config_module = importlib.util.module_from_spec(use_config_spec)
+use_config_spec.loader.exec_module(config_module)
+opt = config_module.opt
 
 os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu_device
 
