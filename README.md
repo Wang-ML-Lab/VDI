@@ -1,5 +1,5 @@
 # Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation (VDI) (Updating)
-This repo contains the code for our ICLR 2023 paper:<br>
+This repo contains the code for our ICLR 2023 paper (Spotlight):<br>
 **Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation**<br>
 Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 *Eleventh International Conference on Learning Representations, 2023*<br>
@@ -28,14 +28,14 @@ Below are inferred domain indices for $48$ domains in *TPT-48*. We color inferre
 </p>
 We could see that VDI's inferred domain indices are highly correlated with each domain's latitude and longitude. For example, Florida (FL) has the lowest latitude among all 48 states and is hence the left-most circle in the left figure.
 
-## Domain Index Definition (Informal)
-We require domain index:
-* Be independent of the data's encoding (Domain-Invariant).
-* Retains as much information on the data as possible.
-* Maximizes adaptation performance.
+## Domain Index Definition (Informal, See Formal Definition in the Paper)
+We require the domain index to:
+* Be independent of the data's encoding (i.e., domain-invariant encoding).
+* Retain as much information on the data as possible.
+* Maximize adaptation performance.
 
 ## Method Overview
-We propose a Hierarchical Bayes model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
+We propose a Hierarchical Bayesian Deep Learning model for domain index inference, which is shown below.  **Left:** Probabilistic graphical model for VDI's generative model. **Right:** Probabilistic graphical model for the VDI's inference model. See our [paper](https://arxiv.org/abs/2302.02561) for detailed explanation.
 <p align="center">
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
@@ -71,11 +71,15 @@ Inferred domain indices (reduced to 1 dimension by PCA) with true domain indices
 #### CompCars
 Inferred domain indices for 30 domains in *CompCars*. We color inferred domain indices according to ground-truth indices, viewpoints (**first**) and YOMs (**second**). Observations are consistent with intuition: (1) domains with the same viewpoint or YOM have similar domain indices; (2) domains with "front-side" and "rear-side" viewpoints have similar domain indices; (3) domains with "front" and "rear" viewpoints have similar domain indices.
 <p align="center">
-<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="72%"/>
+  <img alt="Light" src="fig/visualize_compcar_view.jpg" width="50%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Dark" src="fig/visualize_compcar_YOM.jpg" width="45%">
 </p>
-<p align="center">
-<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg" width="65%"/>
-</p>
+<!-- <p align="center">
+<img src="fig/visualize_compcar_view.jpg" alt="" data-canonical-src="fig/visualize_compcar_view.jpg" width="35%"/>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg width="35%"/>
+</p>     -->
 
 #### DG-15
 **Left:** *Ground-truth* domain graph for **DG-15**. We use 'red' and 'blue' to roughly indicate positive and negative data points in a domain. **Right:** VDI's *inferred* domain graph for *DG-15*, with an AUC of **0.83**.
@@ -106,7 +110,7 @@ Hao Wang*, Hao He*, Dina Katabi<br>
 ```bib
 @inproceedings{VDI,
   title={Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation},
-  author={Xu, Zihao and Hao Guang-Yuan and He, Hao and Wang, Hao},
+  author={Xu, Zihao and Hao, Guang-Yuan and He, Hao and Wang, Hao},
   booktitle={International Conference on Learning Representations},
   year={2023}
 }
