@@ -26,6 +26,7 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
 
     dates = "2023-03-10" # filling your own dates for experiments
     time = ["14","14","04"] # filling the time for experiments. format: hour, miniute, second
+
 3. Run the following code:
 
     python visualize_circle_indices.py
