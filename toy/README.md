@@ -23,14 +23,14 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
 ### Visualization of Circle's Domain Indices
 1. Train the VDI on Circle dataset
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_circle_indices.py":
-
+```
     dates = "2023-03-10" # filling your own dates for experiments
     time = ["14","14","04"] # filling the time for experiments. format: hour, miniute, second
-
+```
 3. Run the following code:
-
+```
     python visualize_circle_indices.py
-
+```
 Your plot should be in the folder that saves the results of your Circle experiment. It should be in "result_save" folder.
 
 
