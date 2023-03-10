@@ -1,7 +1,7 @@
 # VDI on toy dataset
 If you have any questions, feel free to pose an issue or send an email to zihao.xu@rutgers.edu. We are always happy to receive feedback!
 
-The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA). [CIDA](https://github.com/hehaodele/CIDA) also provides many baseline implementations (e.g., DANN, MDD), which we used for performance comparasion.
+The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA). [CIDA](https://github.com/hehaodele/CIDA) also provides many baseline implementations (e.g., DANN, MDD), which we used for performance comparasion in our paper. Please refer to its [code](https://github.com/hehaodele/CIDA) for details.
 
 Notice that we have pretrained the network of q(u|x) and p(x|u) and we included a pretrained weight in this code base. If you want to rerun the pretraining, you need to use the DANN discriminator (set  "opt.d_loss_type = "DANN_loss"" ) and set \sigma_p(x|u) very small (that is, set "opt.lambda_reconstruct" to be about 200~500).
 
