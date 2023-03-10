@@ -7,8 +7,8 @@ opt = EasyDict()
 opt.num_domain = 60
 opt.num_source = 6
 opt.num_target = opt.num_domain - opt.num_source
-opt.src_domain_idx = np.array([40,32,12,29,22,52])  # tight_boundary
-opt.tgt_domain_idx = np.array(list(set(range(0, opt.num_domain)) - set(opt.src_domain_idx)))
+opt.src_domain_idx = [40,32,12,29,22,52]  # tight_boundary
+opt.tgt_domain_idx = list(set(range(0, opt.num_domain)) - set(opt.src_domain_idx))
 
 opt.dataset = "data/toy_d60_pi_random.pkl"
 opt.d_loss_type = "GRDA_loss" # "DANN_loss" # "CIDA_loss" # "DANN_loss_mean"
