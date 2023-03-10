@@ -6,16 +6,9 @@ import pickle
 import argparse
 import importlib.util
 
-# from configs.config_15 import opt
-# from configs.config_30 import opt
-# from configs.config_60 import opt
-# from configs.config_15_random import opt
-# from configs.config_60_random import opt
-# from configs.config_60_random_pi import opt
-
-# loading the config files
+# load the config files
 parser = argparse.ArgumentParser(description='Choose the configs to run.')
-parser.add_argument('--config', type=str, required=True)
+parser.add_argument('-c', '--config', type=str, required=True)
 args = parser.parse_args()
 
 use_config_spec = importlib.util.spec_from_file_location(args.config,"configs/{}.py".format(args.config))
@@ -23,23 +16,16 @@ config_module = importlib.util.module_from_spec(use_config_spec)
 use_config_spec.loader.exec_module(config_module)
 opt = config_module.opt
 
+# set which gpu to use
 os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu_device
 
+# random seed specification
 np.random.seed(opt.seed)
 random.seed(opt.seed)
 torch.manual_seed(opt.seed)
 
-if opt.model == "IDI":
-    from model.model import IDI as Model
-elif opt.model == "DANN":
-    from model.model import DANN as Model
-elif opt.model == "CDANN":
-    from model.model import CDANN as Model
-    opt.cond_disc = True
-elif opt.model == "ADDA":
-    from model.model import ADDA as Model
-elif opt.model == "MDD":
-    from model.model import MDD as Model 
+# init model
+from model.model import VDI as Model
 model = Model(opt).to(opt.device)
 
 data_source = opt.dataset

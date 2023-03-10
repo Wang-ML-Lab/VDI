@@ -11,9 +11,7 @@ opt.src_domain_idx = [0, 12, 3, 4, 14, 8]
 opt.tgt_domain_idx = [1, 2, 5, 6, 7, 9, 10, 11, 13]
 
 opt.dataset = "data/toy_d15_spiral_tight_boundary.pkl"
-opt.model = "IDI"
-opt.d_loss_type = "GRDA_loss" # "DANN_loss" # "CIDA_loss" # "GRDA_loss"
-print("model: {}".format(opt.model))
+opt.d_loss_type = "GRDA_loss" # "DANN_loss" # "CIDA_loss" # "DANN_loss_mean"
 
 opt.use_pretrain_R = True
 opt.pretrain_R_path =  "data/netR_4_dann.pth" 
@@ -33,7 +31,6 @@ opt.peak_lr_d = 3.2*1e-4
 opt.final_lr = 1e-8
 opt.warmup_steps = 70
 
-
 opt.seed = 2333 
 opt.num_epoch = 500
 opt.batch_size = 32
@@ -47,11 +44,11 @@ opt.save_interval = 100
 opt.test_interval = 20  # 20
 
 opt.device = "cuda"
-opt.gpu_device = "3"
+opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4
-opt.no_bn = True  # do not use batch normalization
+opt.no_bn = True   # do not use batch normalization
 opt.normalize_domain = False
 
 # network parameter
