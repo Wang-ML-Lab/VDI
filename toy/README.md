@@ -31,7 +31,10 @@ time = ["14","14","04"] # filling the time for experiments. format: hour, miniut
 ```python
 python visualize_circle_indices.py
 ```
-Your plot should be in the folder that saves the results of your Circle experiment. It should be in "result_save" folder.
+Your plot should be in the folder that saves the results of your Circle experiment. It should be in "result_save" folder and looks similar as follows:
+<p align="center">
+<img src="../fig/visualize_circle.jpg" alt="" data-canonical-src="../fig/visualize_circle.jpg" width="45%"/>
+</p>
 
 
 ## Loss Visualization during training
