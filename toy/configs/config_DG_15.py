@@ -1,5 +1,7 @@
 from easydict import EasyDict
 import numpy as np
+
+from time import localtime, strftime
 # set experiment configs
 opt = EasyDict()
 
@@ -38,7 +40,8 @@ opt.batch_size = 32
 opt.use_visdom = False # True
 opt.visdom_port = 2000
 opt.test_on_all_dmn = False
-opt.outf = "dump"
+tmp_time = localtime()
+opt.outf = "result_save/{}".format(strftime("%Y-%m-%d %H:%M:%S", tmp_time))
 
 opt.save_interval = 100
 opt.test_interval = 20  # 20

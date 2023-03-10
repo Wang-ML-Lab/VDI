@@ -7,12 +7,9 @@ from model.modules import *
 import os
 from visdom import Visdom
 import pickle
-import matplotlib.pyplot as plt
-
 from model.lr_scheduler import TransformerLRScheduler
 import ot
 from sklearn.manifold import MDS
-from geomloss import SamplesLoss
 import json
 # const
 LARGE_NUM = 1e9
@@ -130,7 +127,6 @@ class BaseModel(nn.Module):
             self.nan_flag = False
 
     def test(self, epoch, dataloader):
-        # now is the embedding printing version
         self.eval()
         self.epoch = epoch
 
@@ -164,7 +160,7 @@ class BaseModel(nn.Module):
                 l_x.append(to_np(self.x_seq))
 
             l_y.append(to_np(self.y_seq))
-            # l_r_x.append(to_np(self.r_x_seq))
+            # l_r_x.append(to_np(self.r_x_seq)) # test use only
             l_domain.append(to_np(self.domain_seq))
             l_encode.append(to_np(self.q_z_seq))
             l_label.append(to_np(self.g_seq))
@@ -173,7 +169,7 @@ class BaseModel(nn.Module):
 
         x_all = np.concatenate(l_x, axis=1)
         y_all = np.concatenate(l_y, axis=1)
-        # r_x_all = np.concatenate(l_r_x, axis=1)
+        # r_x_all = np.concatenate(l_r_x, axis=1) # test use only
         e_all = np.concatenate(l_encode, axis=1)
         domain_all = np.concatenate(l_domain, axis=1)
         label_all = np.concatenate(l_label, axis=1)
@@ -189,7 +185,7 @@ class BaseModel(nn.Module):
         d_all['label'] = flat(label_all)
         d_all['encodeing'] = flat(e_all)
         d_all['u'] = u
-        # d_all['r_x'] = flat(r_x_all)
+        # d_all['r_x'] = flat(r_x_all) # test use only
         d_all['u_all'] = flat(u_all)
         d_all['beta'] = beta_all
 
@@ -207,23 +203,13 @@ class BaseModel(nn.Module):
 
         d_all['acc_msg'] = acc_msg
 
-        if not self.bayesian_opt and (self.epoch+1) % 100 == 0:
+        if (self.epoch + 1) % 100 == 0:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
-            self.draw_u(beta_all)
 
         return test_acc, self.nan_flag
 
-    def draw_u(self, data_all):
-        fig, ax = plt.subplots(1, 1, figsize=(6, 6 * 0.9))
-        from sklearn.decomposition import PCA
-        # pca = TSNE(n_components=1)
-        pca = PCA(n_components=1)
-        data_all = pca.fit_transform(data_all)
-        # print(data_all)
-        plt.plot(data_all, '--o') # color='tab:red'
-        plt.savefig("{}/c30_u_epoch_{}.jpg".format(self.opt.outf, self.epoch),bbox_inches='tight',dpi=300)
-
     def my_cat(self, new_u_seq):
+        # concatenation of local domain index u
         st = new_u_seq[0]
         idx_end = len(new_u_seq)
         for i in range(1, idx_end):
@@ -250,16 +236,15 @@ class BaseModel(nn.Module):
         torch.save(self.netD.state_dict(), self.outf + '/netD.pth')
 
     def __set_input__(self, data, train=True):
-        """
-        :param
-            x_seq: Number of domain x Batch size x  Data dim
-            y_seq: Number of domain x Batch size x Predict Data dim
-            (testing: Number of domain x Batch size x test len x Predict Data dim)
-            one_hot_seq: Number of domain x Batch size x Number of vertices (domains)
-            domain_seq: Number of domain x Batch size x domain dim (1)
-            idx_seq: Number of domain x Batch size x 1 (the order in the whole dataset)
-            y_value_seq: Number of domain x Batch size x Predict Data dim
-        """
+        # :param
+        #   x_seq: Number of domain x Batch size x  Data dim
+        #   y_seq: Number of domain x Batch size x Predict Data dim
+        #   (testing: Number of domain x Batch size x test len x Predict Data dim)
+        #   one_hot_seq: Number of domain x Batch size x Number of vertices (domains)
+        #   domain_seq: Number of domain x Batch size x domain dim (1)
+        #   idx_seq: Number of domain x Batch size x 1 (the order in the whole dataset)
+        #   y_value_seq: Number of domain x Batch size x Predict Data dim
+
         x_seq, y_seq, domain_seq = [d[0][None, :, :] for d in data
                                     ], [d[1][None, :] for d in data
                                         ], [d[2][None, :] for d in data]
@@ -308,8 +293,8 @@ class BaseModel(nn.Module):
         self.f_seq = self.netF(self.q_z_seq)
         self.g_seq = torch.argmax(self.f_seq.detach(), dim=2)
 
-        # test
-        self.r_x_seq = self.netR(self.u_seq)
+        # test use only
+        # self.r_x_seq = self.netR(self.u_seq)
 
     def __optimize__(self):
         loss_value = dict()
@@ -327,7 +312,7 @@ class BaseModel(nn.Module):
         # calculate the cosine similarity between each pair
         logits = torch.matmul(u_con_seq, torch.t(u_con_seq)) / temperature
 
-        # We only choose the one that is:
+        # we only choose the one that is:
         # 1, belongs to one domain
         # 2, next to each other
         # as the pair that we want to concentrate them, and all the others will be cancel out
@@ -379,7 +364,6 @@ class BaseModel(nn.Module):
 
         # - E_q[log q(u|x)]
         # u is multi-dimensional
-        # not one dimension! be careful1
         loss_q_u_x = torch.mean((0.5 * flat(self.u_log_var_seq)).sum(1), dim=0)
 
         # - E_q[log q(z|x,u)]
@@ -401,11 +385,6 @@ class BaseModel(nn.Module):
         loss_p_y_z = -F.nll_loss(
             flat(f_seq_source).squeeze(), flat(y_seq_source))
 
-        # use gaussian for u:
-        # log_var = flat(self.u_log_var_seq)
-        # mu = flat(self.u_mu_seq)
-        # loss_u_kld = torch.mean(0.5 * torch.sum(1 + log_var - mu ** 2 - log_var.exp(), dim = 1), dim = 0)
-
         # E_q[log p(\beta|\alpha)]
         # assuming alpha mean = 0
         var_beta = torch.exp(self.beta_log_var_seq)
@@ -422,11 +401,11 @@ class BaseModel(nn.Module):
         # concentrate loss
         loss_u_concentrate = self.contrastive_loss(self.u_con_seq)
 
-        # reconstruction loss
+        # reconstruction loss (p(x|u))
         loss_p_x_u = ((flat(self.x_seq) - flat(self.r_x_seq))**2).sum(1)
         loss_p_x_u = -torch.mean(loss_p_x_u)
 
-        # E gan loss
+        # gan loss (adversarial loss)
         if self.opt.lambda_gan != 0:
             loss_E_gan = -self.loss_D
         else:
@@ -485,13 +464,13 @@ class BaseModel(nn.Module):
                     nn.init.constant_(m.bias, val=0)
 
 
-class IDI(BaseModel):
-    """
-    IDI (Inference Domain Index) Model
-    """
+class VDI(BaseModel):
+    #########
+    # VDI (Variational Domain Index) Model
+    #########
 
     def __init__(self, opt, search_space=None):
-        super(IDI, self).__init__(opt)
+        super(VDI, self).__init__(opt)
 
         self.bayesian_opt = False
         if search_space != None:
@@ -506,22 +485,23 @@ class IDI(BaseModel):
         self.netBeta = BetaNet(opt).to(opt.device).float()
         self.netBeta2U = Beta2UNet(opt).to(opt.device).float()
 
-        # for DANN
+        # for DANN-style discriminator loss & MDS aggregation
         if self.opt.d_loss_type == "DANN_loss":
             self.netD = ClassDiscNet(opt).to(opt.device)
             self.__loss_D__ = self.__loss_D_dann__
             self.generate_beta = self.__reconstruct_u_graph__
+        # for DANN-style discriminator loss & mean aggregation
         elif self.opt.d_loss_type == "DANN_loss_mean":
             self.netD = ClassDiscNet(opt).to(opt.device)
             self.__loss_D__ = self.__loss_D_dann__
             self.generate_beta = self.__u_mean__
             self.netBeta2U = nn.Identity().to(opt.device)
-        # this is for CIDA
+        # for CIDA-style discriminator loss & MDS aggregation
         elif self.opt.d_loss_type == "CIDA_loss":
             self.netD = DiscNet(opt).to(opt.device)
             self.__loss_D__ = self.__loss_D_cida__
             self.generate_beta = self.__u_mean__
-        # for grda
+        # for GRDA-style discriminator & MDS aggregation
         elif self.opt.d_loss_type == "GRDA_loss":
             self.netD = GraphDNet(opt).to(opt.device)
             self.__loss_D__ = self.__loss_D_grda__
@@ -619,15 +599,13 @@ class IDI(BaseModel):
                           flat(self.domain_seq))  # , self.u_seq.mean(1)
 
     def __loss_D_cida__(self, d_seq):
-        # use L1 instead of L2
         # this is for CIDA
+        # use L1 instead of L2
         return F.l1_loss(flat(d_seq),
                          flat(self.u_seq.detach()))  # , self.u_seq.mean(1)
-
-    # grda loss
+    
     def __loss_D_grda__(self, d_seq):
-        # first build the graph
-        # already generate in \beta_seq
+        # this is for GRDA
         A = self.A
 
         criterion = nn.BCEWithLogitsLoss()
@@ -679,6 +657,7 @@ class IDI(BaseModel):
         return errorD * self.num_domain
 
     def __sub_graph__(self, my_sample_v, A):
+        # sub graph tool for grda loss
         if np.random.randint(0, 2) == 0:
             return np.random.choice(self.num_domain,
                                     size=my_sample_v,
@@ -695,8 +674,9 @@ class IDI(BaseModel):
 
         return choosen_node
 
-    # for graph random sampling:
+    
     def __rand_walk__(self, vis, left_nodes, A):
+        # graph random sampling tool for grda loss
         chain_node = []
         node_num = 0
         # choose node
@@ -710,7 +690,6 @@ class IDI(BaseModel):
         cur_node = st
         while left_nodes > 0:
             nx_node = -1
-
             node_to_choose = np.where(vis == 0)[0]
             num = node_to_choose.shape[0]
             node_to_choose = np.random.choice(node_to_choose,
