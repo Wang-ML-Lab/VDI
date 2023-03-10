@@ -8,7 +8,7 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 ## Outline for This README
 * [Brief Introduction for VDI](#brief-introduction-for-vdi)
 * [Sample Visualization of Inferred Domain Indices](#sample-visualization-of-inferred-domain-indices)
-* [Domain Index Definition (Informal)](#domain-index-definition-informal)
+* [Domain Index Definition (Informal)](#domain-index-definition-informal-see-formal-definition-in-the-paper)
 * [Method Overview](#method-overview)
 * [Quantitative Result](#quantitative-result)
 * [More Visualization of Inferred Domain Indices](#more-visualization-of-inferred-domain-indices)
@@ -40,7 +40,7 @@ We propose a Hierarchical Bayesian Deep Learning model for domain index inferenc
 <img src="fig/graphic_model.jpg" alt="" data-canonical-src="fig/graphic_model.jpg" width="70%"/>
 </p>
 
-Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal). This gives rise to our final network structure shown below.
+Our theortical analysis found that **maximizing our model's evidence lower bound** while **adversarially training** an additional discriminator is equivalent to **inferring the optimal domain indices** according to the [definition](#domain-index-definition-informal-see-formal-definition-in-the-paper). This gives rise to our final network structure shown below.
 <p align="center">
 <img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="89%"/>
 </p>
