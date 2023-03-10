@@ -18,7 +18,7 @@ The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA)
     python main.py -c config_Circle (or)
     python main.py --config config_Circle
 
-### Visualization of Circle's domain index
+### Visualization of Circle's Domain Indices
 
 
 ## Loss Visualization during training
