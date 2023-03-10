@@ -98,7 +98,7 @@ In the directory of each dataset, there are detailed steps on how to train VDI a
 <span id="paper_1">[1] **Graph-Relational Domain Adaptation**<br></span>
 Zihao Xu, Hao He, Guang-He Lee, Yuyang Wang, Hao Wang<br>
 *Tenth International Conference on Learning Representations (ICLR), 2022*<br>
-[[Paper](http://wanghao.in/paper/ICLR22_GRDA.pdf)] [[Talk](https://www.youtube.com/watch?v=oNM5hZGVv34)] [[Slides](http://wanghao.in/slides/GRDA_slides.pptx)]
+[[Paper](http://wanghao.in/paper/ICLR22_GRDA.pdf)][[Code]](https://github.com/Wang-ML-Lab/GRDA)[[Talk](https://www.youtube.com/watch?v=oNM5hZGVv34)] [[Slides](http://wanghao.in/slides/GRDA_slides.pptx)]
 
 <span id="paper_2">[2] **Continuously Indexed Domain Adaptation**<br></span>
 Hao Wang*, Hao He*, Dina Katabi<br>
