@@ -88,8 +88,12 @@ Inferred domain indices for 30 domains in *CompCars*. We color inferred domain i
 </p>
 
 ## Installation
-    conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
-    pip install -r requirements.txt
+```python
+conda create -n VDI python=3.8
+conda activate VDI
+conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
+pip install -r requirements.txt
+```
 
 ## Training/Visualizing Steps
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
