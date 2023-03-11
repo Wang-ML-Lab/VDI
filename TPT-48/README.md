@@ -26,7 +26,7 @@ time = ["12","56","54"] # filling the time for experiments. format: hour, miniut
 ```python
 python visualize_tpt_48_indices.py
 ```
-Your plot should be in the folder that saves the results of your TPT-48 experiment ("result_save/dates-time/visualization). It will look similar as follows:
+Your plot should be in the folder that saves the results of your TPT-48 experiment ("result_save/dates-time/visualization"). It will look similar as follows:
 <p align="center">
 <img src="../fig/visualize_tpt_48.jpg" alt="" data-canonical-src="../fig/visualize_tpt_48.jpg" width="93%"/>
 </p>
