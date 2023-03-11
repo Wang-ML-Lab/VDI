@@ -8,7 +8,7 @@ result_save_vis_pth = result_folder + "/visualization"
 if not os.path.exists(result_save_vis_pth):
     os.mkdir(result_save_vis_pth)
 
-result_cmd = result_fd_cmd + "/479_pred.pkl"
+result_cmd = result_fd_cmd + "/499_pred.pkl"
 result_save_vis_cmd = result_fd_cmd + "/visualization"
 result_config_cmd = result_fd_cmd + "/config.json"
 
