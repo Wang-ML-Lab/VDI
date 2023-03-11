@@ -3,7 +3,7 @@ If you have any questions, feel free to pose an issue or send an email to zihao.
 
 The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA). [CIDA](https://github.com/hehaodele/CIDA) also provides many baseline implementations (e.g., DANN, MDD), which we used for performance comparasion in our paper. Please refer to its [code](https://github.com/hehaodele/CIDA) for details.
 
-To accelerate 
+We approximate the Earth Moving distance with [Sinkhorn Loss](https://audeg.github.io/talks/talkLiege.pdf) to accelerate computation. This is done by using the [GeomLoss](https://www.kernel-operations.io/geomloss/) package.
 
 ## W $\rightarrow$ E
 ### How to Train for task W $\rightarrow$ E on TPT-48
@@ -19,8 +19,8 @@ To accelerate
 1. Train the VDI on TPT-48 with either "W $\rightarrow$ E" or "N $\rightarrow$ S" task.
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_tpt_48_indices.py":
 ```python
-dates = "2023-03-10" # filling your own dates for experiments
-time = ["14","14","04"] # filling the time for experiments. format: hour, miniute, second
+dates = "2023-03-11" # filling your own dates for experiments
+time = ["12","56","54"] # filling the time for experiments. format: hour, miniute, second
 ```
 3. Run the following code:
 ```python
