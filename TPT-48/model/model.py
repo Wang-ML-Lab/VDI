@@ -478,10 +478,8 @@ class VDI(BaseModel):
         if search_space != None:
             self.bayesian_opt = True
 
-        # self.netU = GMMNet(opt).to(opt.device)
         self.netU = UNet(opt).to(opt.device)
         self.netUCon = UConcenNet(opt).to(opt.device)
-        # self.netZ = Q_ZNet(opt).to(opt.device)
         self.netZ = Q_ZNet_beta(opt).to(opt.device)
         self.netF = PredNet(opt).to(opt.device)
         self.netR = ReconstructNet(opt).to(opt.device)
