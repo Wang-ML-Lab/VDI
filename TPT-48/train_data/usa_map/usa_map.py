@@ -3,9 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import pandas as pd
-
-
-
 a = pd.read_csv("USAGraphPos.csv")
 
 pos = dict()
@@ -15,10 +12,6 @@ for tup in zip(a['state'], a['pos_x'], a['pos_y']):
     pos[tup[0]] = np.array(tup_tmp, dtype=np.float)
 
 g = nx.read_adjlist('usa_map.txt')
-
-# pos = nx.planar_layout(g)
-
 print(pos)
-# nx.draw_planar(g, pos, with_labels=True)
 nx.draw(g, pos, with_labels=True)
 plt.show()

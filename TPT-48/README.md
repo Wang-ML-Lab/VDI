@@ -3,7 +3,7 @@ If you have any questions, feel free to pose an issue or send an email to zihao.
 
 The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA). [CIDA](https://github.com/hehaodele/CIDA) also provides many baseline implementations (e.g., DANN, MDD), which we used for performance comparasion in our paper. Please refer to its [code](https://github.com/hehaodele/CIDA) for details.
 
-Notice that we have pretrained the network of q(u|x) and p(x|u) and we included a pretrained weight in this code base. If you want to rerun the pretraining, you need to use the DANN discriminator (set  "opt.d_loss_type = "DANN_loss"" ) and set \sigma_p(x|u) very small (that is, set "opt.lambda_reconstruct" to be about 200~500).
+To accelerate 
 
 ## W $\rightarrow$ E
 ### How to Train for task W $\rightarrow$ E on TPT-48
@@ -26,9 +26,9 @@ time = ["14","14","04"] # filling the time for experiments. format: hour, miniut
 ```python
 python visualize_tpt_48_indices.py
 ```
-Your plot should be in the folder that saves the results of your Circle experiment ("result_save/dates-time/visualization). It will look similar as follows:
+Your plot should be in the folder that saves the results of your TPT-48 experiment ("result_save/dates-time/visualization). It will look similar as follows:
 <p align="center">
-<img src="../fig/visualize_circle.jpg" alt="" data-canonical-src="../fig/visualize_circle.jpg" width="45%"/>
+<img src="../fig/tpt_48_quantitive_result.jpg" alt="" data-canonical-src="../fig/tpt_48_quantitive_result.jpg" width="95%"/>
 </p>
 
 

@@ -38,10 +38,6 @@ np.random.seed(opt.seed)
 random.seed(opt.seed)
 torch.manual_seed(opt.seed)
 
-# if opt.bound_prediction:
-#     opt.norm_min = dataloader.norm_min
-#     opt.norm_max = dataloader.norm_max
-
 # train
 for epoch in range(opt.num_epoch):
     model.learn(epoch, dataloader)

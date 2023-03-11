@@ -203,7 +203,7 @@ class BaseModel(nn.Module):
 
         d_all['acc_msg'] = acc_msg
 
-        if (self.epoch + 1) % 100 == 0:
+        if (self.epoch + 1) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
 
         return test_acc, self.nan_flag
