@@ -492,6 +492,7 @@ class VDI(BaseModel):
             self.generate_beta = self.__reconstruct_u_graph__
         # for DANN-style discriminator loss & mean aggregation
         elif self.opt.d_loss_type == "DANN_loss_mean":
+            assert self.opt.u_dim == self.opt.beta_dim, "When you use \"mean\" as aggregation, you should make sure local domain index and global domain index have the same dimension."
             self.netD = ClassDiscNet(opt).to(opt.device)
             self.__loss_D__ = self.__loss_D_dann__
             self.generate_beta = self.__u_mean__
