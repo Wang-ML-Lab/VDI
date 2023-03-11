@@ -195,7 +195,7 @@ class BaseModel(nn.Module):
         d_all['loss_msg'] = loss_msg
         d_all['beta'] = beta_all
     
-        if (self.epoch+1) % self.opt.save_interval or self.epoch + 1 == self.opt.num_epoch:
+        if (self.epoch+1) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
 
         return all_loss.mean(), self.nan_flag
