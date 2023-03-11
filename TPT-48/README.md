@@ -6,30 +6,25 @@ The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA)
 Notice that we have pretrained the network of q(u|x) and p(x|u) and we included a pretrained weight in this code base. If you want to rerun the pretraining, you need to use the DANN discriminator (set  "opt.d_loss_type = "DANN_loss"" ) and set \sigma_p(x|u) very small (that is, set "opt.lambda_reconstruct" to be about 200~500).
 
 ## W $\rightarrow$ E
-### How to Train on DG-15
-    python main.py -c config_DG_15 (or)
-    python main.py --config config_DG_15
+### How to Train for task W $\rightarrow$ E on TPT-48
+    python main.py -c config_TPT_48_WE (or)
+    python main.py --config config_TPT_48_WE
 
-## N -> S
-### How to Train on DG-60
-    python main.py -c config_DG_60 (or)
-    python main.py --config config_DG_60
+## N $\rightarrow$ S
+### How to Train for task N $\rightarrow$ S on TPT-48
+    python main.py -c config_TPT_48_NS (or)
+    python main.py --config config_TPT_48_NS
 
-## Circle
-### How to Train on Circle
-    python main.py -c config_Circle (or)
-    python main.py --config config_Circle
-
-### Visualization of Circle's Domain Indices
-1. Train the VDI on Circle dataset
-2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_circle_indices.py":
+### Visualization of TPT-48's Domain Indices
+1. Train the VDI on TPT-48 with either "W $\rightarrow$ E" or "N $\rightarrow$ S" task.
+2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_tpt_48_indices.py":
 ```python
 dates = "2023-03-10" # filling your own dates for experiments
 time = ["14","14","04"] # filling the time for experiments. format: hour, miniute, second
 ```
 3. Run the following code:
 ```python
-python visualize_circle_indices.py
+python visualize_tpt_48_indices.py
 ```
 Your plot should be in the folder that saves the results of your Circle experiment ("result_save/dates-time/visualization). It will look similar as follows:
 <p align="center">
