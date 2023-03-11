@@ -1,5 +1,3 @@
-from turtle import forward
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -38,78 +36,6 @@ class UConcenNet(nn.Module):
         return u
 
 
-class GMMNet(nn.Module):
-    """
-    Input: Data X
-    Ouput: The estimated domain index
-    Using GMM model
-    """
-
-    # first writting a one-dimension GMM for speed
-
-    def __init__(self, opt):
-        super(GMMNet, self).__init__()
-        nh = opt.num_hidden
-        nin = opt.input_dim
-        nG = opt.num_components
-        n_u = opt.u_dim
-
-        self.nG = opt.num_components
-        self.pi = opt.prior_pi
-        self.opt = opt
-
-        # Temporarily, the u dimension will be 1
-        nout = nG
-        # nout = nG * n_u
-        self.encoder = nn.Sequential(
-            nn.Linear(nin, nh),
-            nn.ReLU(inplace=True),
-            nn.Linear(nh, nh),
-            nn.ReLU(inplace=True),
-            nn.Linear(nh, nh),
-            nn.ReLU(inplace=True)
-        )
-
-        self.fc_mu = nn.Linear(nh, nout)
-        self.fc_log_var = nn.Linear(nh, nout)
-        # self.fc_pi = nn.Linear(nh, nout)
-
-    def encode(self, x):
-        result = self.encoder(x)
-        mu = self.fc_mu(result)
-        log_var = self.fc_log_var(result)
-        # pi = self.fc_pi(result)
-        return mu, log_var # , pi
-
-    def reparameterize(self, mu, log_var):
-        std = torch.exp(0.5 * log_var)
-        eps = torch.randn_like(std)
-        tmp = mu + std * eps
-        pi = torch.from_numpy(self.pi).to(self.opt.device)
-        # 下面这步不太符合生成流程，但为了能反传梯度暂时只能这样
-        u = (tmp * pi).sum(1, keepdim=True)
-        return u
-
-    def forward(self, x):
-        re = x.dim() == 3
-
-        if re:
-            T, B, C = x.shape
-            x = x.reshape(T * B, -1)
-
-        # u step is not reshaped!!
-        mu, log_var= self.encode(x)
-        u = self.reparameterize(mu, log_var)
-
-        if re:
-            u = u.reshape(T, B, -1)
-            mu = mu.reshape(T, B, -1)
-            log_var = log_var.reshape(T, B, -1)
-            # pi = pi.reshape(T, B, -1)
-
-        return u, mu, log_var
-
-
 class Beta2UNet(nn.Module):
     """
     input: 2 dim Beta
@@ -145,19 +71,11 @@ class BetaNet(nn.Module):
             nn.ReLU(inplace=True)
         )
 
-        # self.encoder = self.encoder.float()
-        # self.fc_mu = nn.Linear(nh, nout)
-        # self.fc_mu = nn.BatchNorm1d(nin)
         self.fc_log_var = nn.Linear(nh, nout)
 
     def encode(self, x):
         result = self.encoder(x)
-        # mu = self.fc_mu(result)
-        # be careful about this code! input x!
-        # mu = self.fc_mu(x)
         log_var = self.fc_log_var(result)
-        # pi = self.fc_pi(result)
-        # return mu, log_var # , pi  mu 
         return log_var
 
     def reparameterize(self, mu, log_var):
@@ -166,10 +84,8 @@ class BetaNet(nn.Module):
         beta = mu + std * eps
         return beta
 
-    def forward(self, x, mu_not_use):
-        # mu, log_var = self.encode(x.float())
+    def forward(self, x, mu):
         log_var = self.encode(x.float())
-        mu = mu_not_use
         beta = self.reparameterize(mu, log_var)
         return beta, log_var
 
@@ -182,22 +98,14 @@ class UNet(nn.Module):
     Using Gaussian model
     """
 
-    # first writting a one-dimension GMM for speed
-
     def __init__(self, opt):
         super(UNet, self).__init__()
         nh = opt.num_hidden
         nin = opt.input_dim
-        # nG = opt.num_components
         n_u = opt.u_dim
-
-        # self.nG = opt.num_components
-        # self.pi = opt.prior_pi
         self.opt = opt
 
-        # Temporarily, the u dimension will be 1
         nout = n_u
-        # nout = nG * n_u
         self.encoder = nn.Sequential(
             nn.Linear(nin, nh),
             nn.ReLU(inplace=True),
@@ -205,45 +113,21 @@ class UNet(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(nh, nh),
             nn.ReLU(inplace=True),
-            # one more layer
-            # nn.Linear(nh, nh),
-            # nn.ReLU(inplace=True)
         )
 
         self.fc_mu = nn.Linear(nh, nout)
         self.fc_log_var = nn.Linear(nh, nout)
 
-        # self.fc_mu = nn.Sequential(
-        #     nn.Linear(nh, nh),
-        #     nn.ReLU(inplace=True),
-        #     nn.Linear(nh, nout)
-        # )
-
-        # self.fc_log_var = nn.Sequential(
-        #     nn.Linear(nh, nh),
-        #     nn.ReLU(inplace=True),
-        #     nn.Linear(nh, nout)
-        # )
-
-
-
-        # self.fc_pi = nn.Linear(nh, nout)
-
     def encode(self, x):
         result = self.encoder(x)
         mu = self.fc_mu(result)
         log_var = self.fc_log_var(result)
-        # pi = self.fc_pi(result)
-        return mu, log_var # , pi
+        return mu, log_var
 
     def reparameterize(self, mu, log_var):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         u = mu + std * eps
-        # tmp = mu + std * eps
-        # pi = torch.from_numpy(self.pi).to(self.opt.device)
-        # # 下面这步不太符合生成流程，但为了能反传梯度暂时只能这样
-        # u = (tmp * pi).sum(1, keepdim=True)
         return u
 
     def forward(self, x):
@@ -261,7 +145,6 @@ class UNet(nn.Module):
             u = u.reshape(T, B, -1)
             mu = mu.reshape(T, B, -1)
             log_var = log_var.reshape(T, B, -1)
-            # pi = pi.reshape(T, B, -1)
 
         return u, mu, log_var
 
@@ -300,12 +183,6 @@ class DiscNet(nn.Module):
             self.bn7 = Identity()
 
         self.fc_final = nn.Linear(nh, nout)
-        # if opt.model in ['ADDA', 'CUA']:
-        #     print('===> Discrinimator Output Activation: sigmoid')
-        #     self.output = lambda x: torch.sigmoid(x)
-        # else:
-        #     print('===> Discrinimator Output Activation: identity')
-        #     self.output = lambda x: x
 
     def forward(self, x):
         re = x.dim() == 3
@@ -319,7 +196,6 @@ class DiscNet(nn.Module):
         x = F.relu(self.bn5(self.fc5(x)))
         x = F.relu(self.bn6(self.fc6(x)))
         x = F.relu(self.bn7(self.fc7(x)))
-        # x = self.output(self.fc_final(x))
         x = self.fc_final(x)
 
         if re:
@@ -393,15 +269,9 @@ class ReconstructNet(nn.Module):
         nu = opt.u_dim
         nx = opt.input_dim  # the dimension of x
 
-        # self.fc1 = nn.Linear(nu, int(nh/ 8))
-        # self.fc2 = nn.Linear(int(nh/ 8), int(nh/ 8))
-        # self.fc3 = nn.Linear(int(nh/ 8), int(nh/ 8))
-        # # self.fc4 = nn.Linear(nh * 2, nh * 2)
-        # self.fc_final = nn.Linear(int(nh/ 8), nx)
         self.fc1 = nn.Linear(nu, int(nh))
         self.fc2 = nn.Linear(int(nh), int(nh))
         self.fc3 = nn.Linear(int(nh), int(nh))
-        # self.fc4 = nn.Linear(nh, nh)
         self.fc_final = nn.Linear(int(nh), nx)
 
     def forward(self, x):
@@ -414,7 +284,6 @@ class ReconstructNet(nn.Module):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = F.relu(self.fc3(x))
-        # x = F.relu(self.fc4(x))
         x = self.fc_final(x)
 
         if re:
@@ -453,8 +322,6 @@ class Res_Q_ZNet(nn.Module):
 
     def encode(self, x, u):
         x = F.relu(self.bn1(self.fc1(x)))
-        # print(u.dtype)
-        # be careful!
         u = F.relu(self.bn1_u(self.fc1_u(u.float())))
         u = F.relu(self.bn2_u(self.fc2_u(u)))
 
@@ -475,7 +342,6 @@ class Res_Q_ZNet(nn.Module):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         x = mu + std * eps
-        # x = mu
         return x
 
     def forward(self, x, u):
@@ -513,7 +379,6 @@ class Q_ZNet_beta(nn.Module):
         self.fc1 = nn.Linear(nx, nh)
         self.fc2 = nn.Linear(nh * 3, nh * 2)
         self.fc3 = nn.Linear(nh * 2, nh * 2)
-        # self.fc4 = nn.Linear(nh * 2, nh * 2)
         self.fc_final = nn.Linear(nh * 2, nh)
 
         self.fc1_u = nn.Linear(nu, nh)
@@ -536,8 +401,6 @@ class Q_ZNet_beta(nn.Module):
 
     def encode(self, x, u, beta):
         x = F.relu(self.fc1(x))
-        # print(u.dtype)
-        # be careful!
         u = F.relu(self.fc1_u(u.float()))
         u = F.relu(self.fc2_u(u))
         # u dim
@@ -560,18 +423,10 @@ class Q_ZNet_beta(nn.Module):
         x = F.relu(self.fc3(x))
         x = F.relu(self.fc_final(x))
 
-        # q_mu = self.fc_q_mu(x)
-        # q_log_var = self.fc_q_log_var(x)
-        # q_log_var = self.opt.fixed_var * torch.ones_like(q_mu).to(self.opt.device)
-
         q_mu = F.relu(self.fc_q_mu(x))
         q_mu = self.fc_q_mu_2(q_mu)
         q_log_var = F.relu(self.fc_q_log_var(x))
         q_log_var = self.fc_q_log_var_2(q_log_var)
-
-        # p_mu = self.fc_p_mu(x)
-        # p_log_var = self.fc_p_log_var(x)
-        # p_log_var = self.opt.fixed_var * torch.ones_like(p_mu).to(self.opt.device)
 
         p_mu = F.relu(self.fc_p_mu(x))
         p_mu = self.fc_p_mu_2(p_mu)
@@ -584,7 +439,6 @@ class Q_ZNet_beta(nn.Module):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         x = mu + std * eps
-        # x = mu
         return x
 
     def forward(self, x, u, beta):
@@ -621,7 +475,6 @@ class Q_ZNet(nn.Module):
         self.fc1 = nn.Linear(nx, nh)
         self.fc2 = nn.Linear(nh * 2, nh * 2)
         self.fc3 = nn.Linear(nh * 2, nh * 2)
-        # self.fc4 = nn.Linear(nh * 2, nh * 2)
         self.fc_final = nn.Linear(nh * 2, nh)
 
         self.fc1_u = nn.Linear(nu, nh)
@@ -641,8 +494,6 @@ class Q_ZNet(nn.Module):
 
     def encode(self, x, u):
         x = F.relu(self.fc1(x))
-        # print(u.dtype)
-        # be careful!
         u = F.relu(self.fc1_u(u.float()))
         u = F.relu(self.fc2_u(u))
 
@@ -652,18 +503,10 @@ class Q_ZNet(nn.Module):
         x = F.relu(self.fc3(x))
         x = F.relu(self.fc_final(x))
 
-        # q_mu = self.fc_q_mu(x)
-        # q_log_var = self.fc_q_log_var(x)
-        # q_log_var = self.opt.fixed_var * torch.ones_like(q_mu).to(self.opt.device)
-
         q_mu = F.relu(self.fc_q_mu(x))
         q_mu = self.fc_q_mu_2(q_mu)
         q_log_var = F.relu(self.fc_q_log_var(x))
         q_log_var = self.fc_q_log_var_2(q_log_var)
-
-        # p_mu = self.fc_p_mu(x)
-        # p_log_var = self.fc_p_log_var(x)
-        # p_log_var = self.opt.fixed_var * torch.ones_like(p_mu).to(self.opt.device)
 
         p_mu = F.relu(self.fc_p_mu(x))
         p_mu = self.fc_p_mu_2(p_mu)
@@ -676,7 +519,6 @@ class Q_ZNet(nn.Module):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         x = mu + std * eps
-        # x = mu
         return x
 
     def forward(self, x, u):
@@ -703,11 +545,11 @@ class Q_ZNet(nn.Module):
 
 class PredNet(nn.Module):
     def __init__(self, opt):
+        # This is for regression task.
         super(PredNet, self).__init__()
-
         nh, nc = opt.num_hidden, opt.seq_len
         self.opt = opt
-        # the output dimension is seq_len!!
+        # the output dimension is seq_len
         nin = nh
         self.fc3 = nn.Linear(nin, nh)
         self.bn3 = nn.BatchNorm1d(nh)
@@ -726,38 +568,11 @@ class PredNet(nn.Module):
 
         x = F.relu(self.bn3(self.fc3(x)))
         x = F.relu(self.bn4(self.fc4(x)))
-
-        if self.opt.bound_prediction:
-            x = torch.sigmoid(self.fc_final(x)) * (self.opt.norm_max - self.opt.norm_min) + self.opt.norm_min
-        else:
-            x = self.fc_final(x)
+        x = self.fc_final(x)
 
         if re:
             x = x.reshape(T, B, -1)
         return x
-
-
-        # x = self.fc_final(x)
-        
-        # # just a test !!!
-        # # x = F.log_softmax(x, dim=1)
-        # # if re:
-        # #     x = x.reshape(T, B, -1)
-        # # return x
-
-
-        # # x_softmax = F.softmax(x, dim=1)
-        # # x = torch.log(x_softmax + 1e-4)
-
-
-        # if re:
-        #     x = x.reshape(T, B, -1)
-        #     # x_softmax = x_softmax.reshape(T, B, -1)
-
-        # if return_softmax:
-        #     return x, x_softmax
-        # else:
-        #     return x
 
 
 class GraphDNet(nn.Module):

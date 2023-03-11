@@ -1,14 +1,9 @@
 from easydict import EasyDict
-import numpy as np
 from time import localtime, strftime
 # set experiment configs
 opt = EasyDict()
 
 opt.data_src = "train_data/data/month_temp_data.pkl"
-
-# # N->S
-# opt.src_domain = ['ND','VT','NH','ME', 'WA','MT','SD','MN','WI','MI','NY','MA','OR','ID','WY','NE','IA','IL', 'IN','OH', 'PA', 'NJ','CT','RI']
-# opt.tgt_domain = ['GA', 'OK', 'NC', 'SC', 'LA', 'KY', 'UT', 'MS', 'FL', 'MO', 'MD', 'DE', 'CO', 'CA', 'TN', 'TX', 'KS', 'AZ', 'NV', 'AL', 'VA', 'AR', 'WV', 'NM']
 
 # W (less) -> E
 opt.src_domain = ['WA', 'OR', 'CA', 'ID', 'NV', 'AZ']
@@ -46,10 +41,10 @@ opt.lambda_beta_alpha = 0.6
 
 # for warm up
 opt.init_lr = 1e-6
-opt.peak_lr_e = 3e-5  
-opt.peak_lr_d = 3e-5 
+opt.peak_lr_e = 3e-5
+opt.peak_lr_d = 3e-5
 opt.final_lr = 1e-8
-opt.warmup_steps = 20 
+opt.warmup_steps = 20
 
 
 opt.seed = 1 
@@ -78,12 +73,11 @@ opt.seq_len = 6
 opt.input_dim = 6  # the dimension of input data x
 opt.group_len = 12
 
-opt.u_dim = 8           # the dimension of local domain index u
+opt.u_dim = 8      # the dimension of local domain index u
 opt.beta_dim = 2
 
 # for grda discriminator
 opt.sample_v = 27
 
 # how many nodes to save
-opt.save_sample = 100 
-
+opt.save_sample = 100

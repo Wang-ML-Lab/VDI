@@ -1,4 +1,3 @@
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -67,7 +66,6 @@ class BetaNet(nn.Module):
         nout = nin
 
         self.encoder = nn.Sequential(
-            # nn.BatchNorm1d(nin),
             nn.Linear(nin, nh),
             nn.ReLU(inplace=True)
         )
@@ -146,7 +144,6 @@ class UNet(nn.Module):
             u = u.reshape(T, B, -1)
             mu = mu.reshape(T, B, -1)
             log_var = log_var.reshape(T, B, -1)
-            # pi = pi.reshape(T, B, -1)
 
         return u, mu, log_var
 
@@ -381,7 +378,6 @@ class Q_ZNet_beta(nn.Module):
         self.fc1 = nn.Linear(nx, nh)
         self.fc2 = nn.Linear(nh * 3, nh * 2)
         self.fc3 = nn.Linear(nh * 2, nh * 2)
-        # self.fc4 = nn.Linear(nh * 2, nh * 2)
         self.fc_final = nn.Linear(nh * 2, nh)
 
         self.fc1_u = nn.Linear(nu, nh)
@@ -522,7 +518,6 @@ class Q_ZNet(nn.Module):
         std = torch.exp(0.5 * log_var)
         eps = torch.randn_like(std)
         x = mu + std * eps
-        # x = mu
         return x
 
     def forward(self, x, u):
@@ -549,8 +544,8 @@ class Q_ZNet(nn.Module):
 
 class PredNet(nn.Module):
     def __init__(self, opt):
+        # This is for classification task.
         super(PredNet, self).__init__()
-
         nh, nc = opt.num_hidden, opt.num_class
         nin = nh
         self.fc3 = nn.Linear(nin, nh)

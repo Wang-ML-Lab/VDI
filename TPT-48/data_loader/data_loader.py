@@ -38,26 +38,34 @@ class WeatherDataLoader():
                 for state in self.all_states
         ]
 
-        if self.opt.test_on_all_dmn:
-            # test on all domains
-            self.test_datasets = [
-                CovidTestDataset(self.raw_data[state], 
-                    all_mean=self.all_mean, 
-                    all_std=self.all_std,
-                    domain_idx=self.opt.state2num[state],
-                    opt=opt) 
-                    for state in self.all_states
-            ]
-        else:
-            # test only on target domain
-            self.test_datasets = [
-                CovidTestDataset(self.raw_data[state], 
-                    all_mean=self.all_mean, 
-                    all_std=self.all_std,
-                    domain_idx=self.opt.state2num[state],
-                    opt=opt) 
-                    for state in self.tgt_domain
-            ]
+        self.test_datasets = [
+            CovidTestDataset(self.raw_data[state], 
+                all_mean=self.all_mean, 
+                all_std=self.all_std,
+                domain_idx=self.opt.state2num[state],
+                opt=opt) 
+                for state in self.all_states
+        ]
+        # if self.opt.test_on_all_dmn:
+        #     # test on all domains
+        #     self.test_datasets = [
+        #         CovidTestDataset(self.raw_data[state], 
+        #             all_mean=self.all_mean, 
+        #             all_std=self.all_std,
+        #             domain_idx=self.opt.state2num[state],
+        #             opt=opt) 
+        #             for state in self.all_states
+        #     ]
+        # else:
+        #     # test only on target domain
+        #     self.test_datasets = [
+        #         CovidTestDataset(self.raw_data[state], 
+        #             all_mean=self.all_mean, 
+        #             all_std=self.all_std,
+        #             domain_idx=self.opt.state2num[state],
+        #             opt=opt) 
+        #             for state in self.tgt_domain
+        #     ]
         
         self.train_data_loader = [
             DataLoader(dataset, 
