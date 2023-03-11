@@ -58,11 +58,8 @@ opt.batch_size = 16
 
 opt.use_visdom = False # True
 opt.visdom_port = 2000
-opt.test_on_all_dmn = True
 tmp_time = localtime()
 opt.outf = "result_save/{}".format(strftime("%Y-%m-%d %H:%M:%S", tmp_time))
-# opt.outf_vis = "result_save/{}".format(strftime("%Y-%m-%d\ %H\:%M\:%S", tmp_time))
-
 
 opt.save_interval = 100
 opt.test_interval = 20
@@ -80,21 +77,12 @@ opt.num_hidden = 512
 opt.seq_len = 6
 opt.input_dim = 6  # the dimension of input data x
 opt.group_len = 12
-# opt.bound_prediction = False
-
 
 opt.u_dim = 8           # the dimension of local domain index u
 opt.beta_dim = 2
 
 # for grda discriminator
 opt.sample_v = 27
-
-# # for freeze u net
-# opt.freeze_u_epoch = -1 # set -1 to not freeze u net
-
-# opt.fixed_var = 1e-2
-
-# opt.sigma_beta = 1e-2
 
 # how many nodes to save
 opt.save_sample = 100 
