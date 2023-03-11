@@ -28,7 +28,7 @@ python visualize_tpt_48_indices.py
 ```
 Your plot should be in the folder that saves the results of your TPT-48 experiment ("result_save/dates-time/visualization). It will look similar as follows:
 <p align="center">
-<img src="../fig/tpt_48_quantitive_result.jpg" alt="" data-canonical-src="../fig/tpt_48_quantitive_result.jpg" width="95%"/>
+<img src="../fig/visualize_tpt_48.jpg" alt="" data-canonical-src="../fig/visualize_tpt_48.jpg" width="93%"/>
 </p>
 
 
