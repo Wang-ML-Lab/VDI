@@ -5,7 +5,7 @@ The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA)
 
 Notice that we have pretrained the network of q(u|x) and p(x|u) and we included a pretrained weight in this code base. If you want to rerun the pretraining, you need to use the DANN discriminator (set  "opt.d_loss_type = "DANN_loss"" ) and set \sigma_p(x|u) very small (that is, set "opt.lambda_reconstruct" to be about 200~500).
 
-## W -> E
+## W $\rightarrow$ E
 ### How to Train on DG-15
     python main.py -c config_DG_15 (or)
     python main.py --config config_DG_15
