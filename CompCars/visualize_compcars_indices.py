@@ -1,6 +1,6 @@
 import os
 dates = "2023-03-11" # filling your own dates for experiments
-time = ["12","56","54"] # filling the time for experiments. format: hour, miniute, second
+time = ["21","59","11"] # filling the time for experiments. format: hour, miniute, second
 result_folder = r"result_save/{} {}:{}:{}".format(dates, time[0], time[1], time[2])
 result_fd_cmd = r"result_save/{}\ {}\:{}\:{}".format(dates, time[0], time[1], time[2])
 
