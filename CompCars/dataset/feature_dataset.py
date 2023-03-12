@@ -2,12 +2,15 @@ import numpy as np
 from torch.utils.data import DataLoader, Dataset
 import pickle
 
+
 def read_pickle(name):
     with open(name, 'rb') as f:
         data = pickle.load(f)
     return data
 
+
 class FeatureDataset(Dataset):
+
     def __init__(self, pkl, domain_id, sudo_len, opt=None):
         idx = pkl['domain'] == domain_id
         self.data = pkl['data'][idx].astype(np.float32)
@@ -23,7 +26,9 @@ class FeatureDataset(Dataset):
     def __len__(self):
         return self.sudo_len
 
+
 class FeatureDataloader(DataLoader):
+
     def __init__(self, opt):
         self.opt = opt
         self.src_domain_idx = opt.src_domain_idx
@@ -36,7 +41,7 @@ class FeatureDataloader(DataLoader):
             idx = self.pkl['domain'] == i
             sudo_len = max(sudo_len, idx.sum())
         self.sudo_len = sudo_len
-        
+
         print("sudo len: {}".format(sudo_len))
 
         self.datasets = [
@@ -49,16 +54,16 @@ class FeatureDataloader(DataLoader):
         ]
 
         self.data_loader = [
-            DataLoader(dataset, 
-                batch_size=opt.batch_size, 
+            DataLoader(
+                dataset,
+                batch_size=opt.batch_size,
                 shuffle=opt.shuffle,
                 # num_workers=2,
                 num_workers=0,
                 pin_memory=True,
                 # drop last only for new picked data of compcar
                 drop_last=True,
-                ) 
-                for dataset in self.datasets
+            ) for dataset in self.datasets
         ]
 
     def get_data(self):

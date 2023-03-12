@@ -141,14 +141,19 @@ class BaseModel(nn.Module):
             self.init_test = True
 
         acc_num = torch.zeros(self.num_domain).to(self.device)
-        l_x = torch.zeros(self.num_domain, self.save_sample, self.opt.input_dim).to(self.device)
+        l_x = torch.zeros(self.num_domain, self.save_sample,
+                          self.opt.input_dim).to(self.device)
         l_y = torch.zeros(self.num_domain, self.save_sample).to(self.device)
         # l_r_x = []
-        l_domain = torch.zeros(self.num_domain, self.save_sample).to(self.device)
-        l_label = torch.zeros(self.num_domain, self.save_sample).to(self.device)
-        l_encode = torch.zeros(self.num_domain, self.save_sample, self.opt.num_hidden).to(self.device)
+        l_domain = torch.zeros(self.num_domain,
+                               self.save_sample).to(self.device)
+        l_label = torch.zeros(self.num_domain,
+                              self.save_sample).to(self.device)
+        l_encode = torch.zeros(self.num_domain, self.save_sample,
+                               self.opt.num_hidden).to(self.device)
         l_u = torch.zeros(self.num_domain, self.opt.u_dim).to(self.device)
-        l_u_all = torch.zeros(self.num_domain, self.save_sample, self.opt.u_dim).to(self.device)
+        l_u_all = torch.zeros(self.num_domain, self.save_sample,
+                              self.opt.u_dim).to(self.device)
 
         sample_count = 0
         # sample a few datapoints for visualization
@@ -167,15 +172,22 @@ class BaseModel(nn.Module):
                 count += 1
 
                 acc_num += self.g_seq.eq(self.y_seq).to(torch.float).sum(-1)
-                l_x[:, (count-1) * self.factor: count * self.factor, :] = self.x_seq[:, self.save_sample_idx,:]
-                l_y[:, (count-1) * self.factor: count * self.factor] = self.y_seq[:, self.save_sample_idx]
-                l_domain[:, (count-1) * self.factor: count * self.factor] = self.domain_seq[:, self.save_sample_idx]
-                l_encode[:, (count-1) * self.factor: count * self.factor, :] = self.q_z_seq[:, self.save_sample_idx,:]
-                l_label[:, (count-1) * self.factor: count * self.factor] = self.g_seq[:, self.save_sample_idx]
+                l_x[:, (count - 1) * self.factor:count *
+                    self.factor, :] = self.x_seq[:, self.save_sample_idx, :]
+                l_y[:, (count - 1) * self.factor:count *
+                    self.factor] = self.y_seq[:, self.save_sample_idx]
+                l_domain[:, (count - 1) * self.factor:count *
+                         self.factor] = self.domain_seq[:,
+                                                        self.save_sample_idx]
+                l_encode[:, (count - 1) * self.factor:count *
+                         self.factor, :] = self.q_z_seq[:, self.
+                                                        save_sample_idx, :]
+                l_label[:, (count - 1) * self.factor:count *
+                        self.factor] = self.g_seq[:, self.save_sample_idx]
                 l_u += self.u_seq.sum(1)
-                l_u_all[:, (count-1) * self.factor: count * self.factor, :] = self.u_seq[:, self.save_sample_idx,:]
-
-                
+                l_u_all[:, (count - 1) * self.factor:count *
+                        self.factor, :] = self.u_seq[:,
+                                                     self.save_sample_idx, :]
 
         acc = to_np(acc_num / sample_count)
         test_acc = acc[self.opt.tgt_domain_idx].sum() / (
@@ -199,7 +211,9 @@ class BaseModel(nn.Module):
         d_all['u_all'] = flat(to_np(l_u_all))
         d_all['beta'] = to_np(self.beta_seq)
 
-        if (self.epoch+1) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
+        if (
+                self.epoch + 1
+        ) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
 
         return test_acc, self.nan_flag
@@ -285,7 +299,7 @@ class BaseModel(nn.Module):
         else:
             self.tmp_beta_seq = self.generate_beta(self.u_seq)
             self.beta_seq, _ = self.netBeta(self.tmp_beta_seq,
-                                        self.tmp_beta_seq)
+                                            self.tmp_beta_seq)
 
         self.q_z_seq, self.q_z_mu_seq, self.q_z_log_var_seq, self.p_z_seq, self.p_z_mu_seq, self.p_z_log_var_seq, = self.netZ(
             self.x_seq, self.u_seq, self.beta_seq)
@@ -315,7 +329,7 @@ class BaseModel(nn.Module):
         # 1, belongs to one domain
         # 2, next to each other
         # as the pair that we want to concentrate them, and all the others will be cancel out
-        
+
         # the first 2 steps will generate matrix in this format:
         # [0, 1, 0, 0]
         # [0, 0, 1, 0]
@@ -324,7 +338,7 @@ class BaseModel(nn.Module):
         base_m = torch.diag(torch.ones(self.tmp_batch_size - 1),
                             diagonal=1).to(self.device)
         base_m[self.tmp_batch_size - 1, 0] = 1
-        
+
         # Then we generate the "complementary" matrix in this format:
         # [1, 0, 1, 1]
         # [1, 1, 0, 1]
@@ -355,7 +369,6 @@ class BaseModel(nn.Module):
 
         loss_u_concentrate = F.cross_entropy(logits, label)
         return loss_u_concentrate
-
 
     def __optimize_DUZF__(self):
         self.train()
@@ -573,22 +586,24 @@ class VDI(BaseModel):
         mu_beta = u_seq.mean(1).detach()
         mu_beta_mean = mu_beta.mean(0, keepdim=True)
         mu_beta_std = mu_beta.std(0, keepdim=True)
-        mu_beta_std = torch.maximum(mu_beta_std, torch.ones_like(mu_beta_std) * 1e-12)
+        mu_beta_std = torch.maximum(mu_beta_std,
+                                    torch.ones_like(mu_beta_std) * 1e-12)
         mu_beta = (mu_beta - mu_beta_mean) / mu_beta_std
         return mu_beta
+
     def __reconstruct_u_graph__(self, u_seq):
         with torch.no_grad():
             A = torch.zeros(self.num_domain, self.num_domain)
             new_u = u_seq.detach()
-            # ~ Wasserstein Loss 
+            # ~ Wasserstein Loss
             loss = SamplesLoss(loss="sinkhorn", p=2, blur=.05)
             for i in range(self.num_domain):
                 for j in range(i + 1, self.num_domain):
                     A[i][j] = loss(new_u[i], new_u[j])
                     A[j][i] = A[i][j]
-            
+
             A_np = to_np(A)
-            bound = np.sort(A.flatten())[int(self.num_domain ** 2 * 1 / 4)]
+            bound = np.sort(A.flatten())[int(self.num_domain**2 * 1 / 4)]
             # generate self.A
             self.A = (A_np < bound)
 
@@ -598,7 +613,8 @@ class VDI(BaseModel):
             # new normalization:
             mu_beta_mean = mu_beta.mean(0, keepdim=True)
             mu_beta_std = mu_beta.std(0, keepdim=True)
-            mu_beta_std = torch.maximum(mu_beta_std, torch.ones_like(mu_beta_std) * 1e-12)
+            mu_beta_std = torch.maximum(mu_beta_std,
+                                        torch.ones_like(mu_beta_std) * 1e-12)
             mu_beta = (mu_beta - mu_beta_mean) / mu_beta_std
 
             return mu_beta
@@ -612,10 +628,8 @@ class VDI(BaseModel):
         d_seq_source = d_seq[self.domain_mask == 1]
         d_seq_target = d_seq[self.domain_mask == 0]
         # D: discriminator loss from classifying source v.s. target
-        loss_D = (
-            -torch.log(d_seq_source + 1e-10).mean()
-            - torch.log(1 - d_seq_target + 1e-10).mean()
-        )
+        loss_D = (-torch.log(d_seq_source + 1e-10).mean() -
+                  torch.log(1 - d_seq_target + 1e-10).mean())
         return loss_D
 
     def __loss_D_cida__(self, d_seq):
@@ -623,7 +637,7 @@ class VDI(BaseModel):
         # use L1 instead of L2
         return F.l1_loss(flat(d_seq),
                          flat(self.u_seq.detach()))  # , self.u_seq.mean(1)
-    
+
     def __loss_D_grda__(self, d_seq):
         # this is for GRDA
         A = self.A
@@ -694,7 +708,6 @@ class VDI(BaseModel):
 
         return choosen_node
 
-    
     def __rand_walk__(self, vis, left_nodes, A):
         # graph random sampling tool for grda loss
         chain_node = []
