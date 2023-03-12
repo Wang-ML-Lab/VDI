@@ -56,10 +56,6 @@ class BaseModel(nn.Module):
             self.test_pane_init = False
 
         self.num_domain = opt.num_domain
-        if self.opt.test_on_all_dmn:
-            self.test_dmn_num = self.num_domain
-        else:
-            self.test_dmn_num = self.opt.num_target
 
         self.outf = self.opt.outf
         self.train_log = self.outf + "/loss.log"

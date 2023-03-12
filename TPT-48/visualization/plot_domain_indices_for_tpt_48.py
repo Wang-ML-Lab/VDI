@@ -1,24 +1,21 @@
 import matplotlib.pyplot as plt
+import pickle
 import numpy as np
 import random
 import pickle
 import matplotlib
 import pandas as pd
 import sys
-import time
+
 np.random.seed(0)
 random.seed(0)
 
-import pickle
 
 def read_pickle(name):
     with open(name, 'rb') as f:
         data = pickle.load(f)
     return data
 
-def write_pickle(data, name):
-    with open(name,'wb') as f:
-        pickle.dump(data, f)
 
 def draw_2_div(data, num_domain):
     fig, ax = plt.subplots(1, 1, figsize=(6, 6 * 0.9))
@@ -65,17 +62,12 @@ def draw_2_div(data, num_domain):
     plt.clf()
 
 if __name__ == "__main__":
-    start_time = time.time()
     result = sys.argv[1]
     save_folder = sys.argv[2]
     config_pth = sys.argv[3]
     info = read_pickle(result)
-    plot_data = 'u_all' 
 
-    fig, ax = plt.subplots(1, 1, figsize=(6, 6 * 0.9))
     print(info['loss_msg'])
-
-    data_raw = info[plot_data]
     data_domain = info['domain']
 
     import json
@@ -86,9 +78,7 @@ if __name__ == "__main__":
     tgt_domain = config['tgt_domain']
     all_domain = config['all_domain']
 
-    label_all = data_domain
-    fig, ax = plt.subplots(1, 1, figsize=(6, 6 * 0.9))
-    num_domain = int(np.max(label_all)) + 1
+    num_domain = int(np.max(data_domain)) + 1
 
     beta = info['beta']
     draw_2_div(beta, num_domain)
