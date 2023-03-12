@@ -34,7 +34,6 @@ opt.lambda_gan = 0.3
 opt.lambda_reconstruct = 10
 opt.lambda_u_concentrate = 0.8
 opt.lambda_beta = 0.8
-
 opt.lambda_beta_alpha = 0.6
 
 # for warm up
