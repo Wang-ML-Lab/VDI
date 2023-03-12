@@ -20,7 +20,7 @@ time = ["21","59","11"] # filling the time for experiments. format: hour, miniut
 ```python
 python visualize_compcars_indices.py
 ```
-Your plot should be in the folder that saves the results of your CompCars experiment ("result_save/dates-time/visualization). It will look similar as follows:
+Your plot should be in the folder that saves the results of your CompCars experiment ("result_save/dates-time/visualization"). It will look similar as follows:
 <p align="center">
   <img alt="Light" src="../fig/visualize_compcar_view.jpg" width="50%">
 &nbsp; &nbsp; &nbsp; &nbsp;
