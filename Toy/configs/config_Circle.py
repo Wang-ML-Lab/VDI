@@ -27,8 +27,8 @@ opt.d_loss_type = "DANN_loss_mean" # "CIDA_loss" # "GRDA_loss" # "DANN_loss"
 
 # for warm up
 opt.init_lr = 1e-6
-opt.peak_lr_d = 1.1 * 1e-4
 opt.peak_lr_e = 1.1 * 1e-4
+opt.peak_lr_d = 1.1 * 1e-4
 opt.final_lr = 1e-8
 opt.warmup_steps = 40
 

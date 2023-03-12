@@ -10,7 +10,6 @@ import pickle
 import json
 
 from model.lr_scheduler import TransformerLRScheduler
-import matplotlib.pyplot as plt
 from sklearn.manifold import MDS
 from geomloss import SamplesLoss
 # const
@@ -201,6 +200,7 @@ class BaseModel(nn.Module):
         return all_loss.mean(), self.nan_flag
 
     def my_cat(self, new_u_seq):
+        # concatenation of local domain index u
         st = new_u_seq[0]
         idx_end = len(new_u_seq)
         for i in range(1, idx_end):

@@ -1,11 +1,7 @@
 import os
-from statistics import mode
-from easydict import EasyDict
-import matplotlib.pyplot as plt
 import torch
 import numpy as np
 import random
-import pickle
 import argparse
 import importlib.util
 
@@ -34,9 +30,6 @@ model = Model(opt).to(opt.device)
 from data_loader.data_loader import WeatherDataLoader
 
 dataloader = WeatherDataLoader(opt)
-np.random.seed(opt.seed)
-random.seed(opt.seed)
-torch.manual_seed(opt.seed)
 
 # train
 for epoch in range(opt.num_epoch):
