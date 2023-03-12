@@ -3,6 +3,8 @@ If you have any questions, feel free to pose an issue or send an email to zihao.
 
 The code for VDI is developed based on [CIDA](https://github.com/hehaodele/CIDA). [CIDA](https://github.com/hehaodele/CIDA) also provides many baseline implementations (e.g., DANN, MDD), which we used for performance comparasion in our paper. Please refer to its [code](https://github.com/hehaodele/CIDA) for details.
 
+In order to eliminate the influence of imbalanced labels, we ensure that each domain shares similar label distributions by picking a subset of [CompCars](http://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/). To accelerate training, we derive a 4096-dim feature vector from each input image by Resnet18, and then apply VDI on the feature vectors. These feature vectors are included in "data" folder.
+
 ## How to Train on CompCars
     python main.py -c config_CompCars (or)
     python main.py --config config_config_CompCars
