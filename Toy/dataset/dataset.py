@@ -1,17 +1,21 @@
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 import pickle
+
+
 def read_pickle(name):
     with open(name, 'rb') as f:
         data = pickle.load(f)
     return data
 
+
 def write_pickle(data, name):
-    with open(name,'wb') as f:
+    with open(name, 'wb') as f:
         pickle.dump(data, f)
 
 
 class ToyDataset(Dataset):
+
     def __init__(self, pkl, domain_id, opt=None):
         idx = pkl['domain'] == domain_id
         self.data = pkl['data'][idx].astype(np.float32)
@@ -20,7 +24,8 @@ class ToyDataset(Dataset):
 
         if opt.normalize_domain:
             print('===> Normalize in every domain')
-            self.data_m, self.data_s = self.data.mean(0, keepdims=True), self.data.std(0, keepdims=True)
+            self.data_m, self.data_s = self.data.mean(
+                0, keepdims=True), self.data.std(0, keepdims=True)
             self.data = (self.data - self.data_m) / self.data_s
 
     def __getitem__(self, idx):
@@ -36,8 +41,7 @@ class SeqToyDataset(Dataset):
         self.datasets = datasets
         self.size = size
         print('SeqDataset Size {} Sub Size {}'.format(
-            size, [len(ds) for ds in datasets]
-        ))
+            size, [len(ds) for ds in datasets]))
 
     def __len__(self):
         return self.size

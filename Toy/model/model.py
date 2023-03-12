@@ -199,7 +199,9 @@ class BaseModel(nn.Module):
 
         d_all['acc_msg'] = acc_msg
 
-        if (self.epoch + 1) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
+        if (
+                self.epoch + 1
+        ) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
 
         return test_acc, self.nan_flag
@@ -282,7 +284,7 @@ class BaseModel(nn.Module):
         else:
             self.tmp_beta_seq = self.generate_beta(self.u_seq)
             self.beta_seq, _ = self.netBeta(self.tmp_beta_seq,
-                                        self.tmp_beta_seq)
+                                            self.tmp_beta_seq)
 
         self.q_z_seq, self.q_z_mu_seq, self.q_z_log_var_seq, self.p_z_seq, self.p_z_mu_seq, self.p_z_log_var_seq, = self.netZ(
             self.x_seq, self.u_seq, self.beta_seq)
@@ -312,7 +314,7 @@ class BaseModel(nn.Module):
         # 1, belongs to one domain
         # 2, next to each other
         # as the pair that we want to concentrate them, and all the others will be cancel out
-        
+
         # the first 2 steps will generate matrix in this format:
         # [0, 1, 0, 0]
         # [0, 0, 1, 0]
@@ -321,7 +323,7 @@ class BaseModel(nn.Module):
         base_m = torch.diag(torch.ones(self.tmp_batch_size - 1),
                             diagonal=1).to(self.device)
         base_m[self.tmp_batch_size - 1, 0] = 1
-        
+
         # Then we generate the "complementary" matrix in this format:
         # [1, 0, 1, 1]
         # [1, 1, 0, 1]
@@ -560,10 +562,11 @@ class VDI(BaseModel):
         mu_beta = u_seq.mean(1).detach()
         mu_beta_mean = mu_beta.mean(0, keepdim=True)
         mu_beta_std = mu_beta.std(0, keepdim=True)
-        mu_beta_std = torch.maximum(mu_beta_std, torch.ones_like(mu_beta_std) * 1e-12)
+        mu_beta_std = torch.maximum(mu_beta_std,
+                                    torch.ones_like(mu_beta_std) * 1e-12)
         mu_beta = (mu_beta - mu_beta_mean) / mu_beta_std
         return mu_beta
- 
+
     def __reconstruct_u_graph__(self, u_seq):
         A = np.zeros((self.opt.num_domain, self.opt.num_domain))
 
@@ -600,7 +603,7 @@ class VDI(BaseModel):
         # use L1 instead of L2
         return F.l1_loss(flat(d_seq),
                          flat(self.u_seq.detach()))  # , self.u_seq.mean(1)
-    
+
     def __loss_D_grda__(self, d_seq):
         # this is for GRDA
         A = self.A
@@ -671,7 +674,6 @@ class VDI(BaseModel):
 
         return choosen_node
 
-    
     def __rand_walk__(self, vis, left_nodes, A):
         # graph random sampling tool for grda loss
         chain_node = []

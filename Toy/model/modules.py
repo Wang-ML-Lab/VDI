@@ -4,6 +4,7 @@ import torch.nn.functional as F
 
 
 class Identity(nn.Module):
+
     def __init__(self):
         super(Identity, self).__init__()
 
@@ -12,6 +13,7 @@ class Identity(nn.Module):
 
 
 class UConcenNet(nn.Module):
+
     def __init__(self, opt):
         super(UConcenNet, self).__init__()
         nh = opt.num_hidden
@@ -41,6 +43,7 @@ class Beta2UNet(nn.Module):
     input: 2 dim Beta
     output: 4 dim Beta for u loss
     """
+
     def __init__(self, opt):
         super(Beta2UNet, self).__init__()
         nin = opt.beta_dim
@@ -65,10 +68,7 @@ class BetaNet(nn.Module):
         self.opt = opt
         nout = nin
 
-        self.encoder = nn.Sequential(
-            nn.Linear(nin, nh),
-            nn.ReLU(inplace=True)
-        )
+        self.encoder = nn.Sequential(nn.Linear(nin, nh), nn.ReLU(inplace=True))
 
         self.fc_log_var = nn.Linear(nh, nout)
 
@@ -87,7 +87,6 @@ class BetaNet(nn.Module):
         log_var = self.encode(x.float())
         beta = self.reparameterize(mu, log_var)
         return beta, log_var
-
 
 
 class UNet(nn.Module):
@@ -261,6 +260,7 @@ class ClassDiscNet(nn.Module):
 
 
 class ReconstructNet(nn.Module):
+
     def __init__(self, opt):
         super(ReconstructNet, self).__init__()
 
@@ -279,7 +279,7 @@ class ReconstructNet(nn.Module):
         if re:
             T, B, C = x.shape
             x = x.reshape(T * B, -1)
-        
+
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = F.relu(self.fc3(x))
@@ -291,6 +291,7 @@ class ReconstructNet(nn.Module):
 
 
 class Q_ZNet_beta(nn.Module):
+
     def __init__(self, opt):
         super(Q_ZNet_beta, self).__init__()
 
@@ -337,7 +338,8 @@ class Q_ZNet_beta(nn.Module):
 
         tmp_B = int(u.shape[0] / beta.shape[0])
 
-        beta = beta.unsqueeze(dim=1).expand(-1, tmp_B, -1).reshape(u.shape[0], -1)
+        beta = beta.unsqueeze(dim=1).expand(-1, tmp_B,
+                                            -1).reshape(u.shape[0], -1)
         # beta dim
         # (domain * batch) x h
 
@@ -388,6 +390,7 @@ class Q_ZNet_beta(nn.Module):
 
 
 class Q_ZNet(nn.Module):
+
     def __init__(self, opt):
         super(Q_ZNet, self).__init__()
 
@@ -468,6 +471,7 @@ class Q_ZNet(nn.Module):
 
 
 class PredNet(nn.Module):
+
     def __init__(self, opt):
         # This is for classification task.
         super(PredNet, self).__init__()

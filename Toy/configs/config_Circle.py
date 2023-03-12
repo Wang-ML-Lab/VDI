@@ -18,12 +18,12 @@ opt.lambda_u_concentrate = 0.1
 opt.lambda_beta = 0.1
 opt.lambda_beta_alpha = 0.1
 
-opt.use_pretrain_R =  False
+opt.use_pretrain_R = False
 # opt.pretrain_R_path =  "data/netR_1_c30.pth" # "data/netR_2_dann.pth" # "data/netR_4_dann.pth"
 # opt.pretrain_U_path = "data/netU_1_c30.pth" # "data/netU_2_dann.pth" # "data/netU_4_dann.pth"
 opt.fix_u_r = False
 
-opt.d_loss_type = "DANN_loss_mean" # "CIDA_loss" # "GRDA_loss" # "DANN_loss"
+opt.d_loss_type = "DANN_loss_mean"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss"
 
 # for warm up
 opt.init_lr = 1e-6
@@ -32,12 +32,11 @@ opt.peak_lr_d = 1.1 * 1e-4
 opt.final_lr = 1e-8
 opt.warmup_steps = 40
 
-
 opt.seed = 2333
 opt.num_epoch = 800
 opt.batch_size = 16
 
-opt.use_visdom = False # True
+opt.use_visdom = False  # True
 opt.visdom_port = 2000
 opt.test_on_all_dmn = False
 tmp_time = localtime()
@@ -51,7 +50,7 @@ opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4
-opt.no_bn = True   # do not use batch normalization
+opt.no_bn = True  # do not use batch normalization
 opt.normalize_domain = False
 
 # network parameter
@@ -59,5 +58,5 @@ opt.num_hidden = 512
 opt.num_class = 2  # how many classes for classification input data x
 opt.input_dim = 2  # the dimension of input data x
 
-opt.u_dim = 2      # the dimension of local domain index u
-opt.beta_dim = 2   # the dimension of global domain index beta
+opt.u_dim = 2  # the dimension of local domain index u
+opt.beta_dim = 2  # the dimension of global domain index beta

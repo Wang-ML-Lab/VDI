@@ -9,10 +9,12 @@ import matplotlib
 import sys
 import pickle
 
+
 def read_pickle(name):
     with open(name, 'rb') as f:
         data = pickle.load(f)
     return data
+
 
 if __name__ == "__main__":
     result = sys.argv[1]
@@ -46,21 +48,29 @@ if __name__ == "__main__":
 
     # print(data_all)
     # print(x_all)
-    corr = np.corrcoef(x_all.T, data_all[::,0])
+    corr = np.corrcoef(x_all.T, data_all[::, 0])
     print('corr: ', corr)
-    corr_num = scipy.stats.pearsonr(x_all.T, data_all[::,0])
+    corr_num = scipy.stats.pearsonr(x_all.T, data_all[::, 0])
     print('corr: ', corr_num)
 
     fsize = 18
     fsize_legend = 16
     fsize_tick = 16
 
-    plt.ylabel('Normalized Estimated Domain Indices', fontsize = fsize)
-    plt.xlabel('Normalized True Domain Indices', fontsize = fsize)
-    plt.yticks(fontsize = fsize_tick)
-    plt.xticks(fontsize = fsize_tick)
+    plt.ylabel('Normalized Estimated Domain Indices', fontsize=fsize)
+    plt.xlabel('Normalized True Domain Indices', fontsize=fsize)
+    plt.yticks(fontsize=fsize_tick)
+    plt.xticks(fontsize=fsize_tick)
     props = dict(boxstyle='Square', facecolor='white')
-    ax.text(0.01, 0.95, 'Correlation={:.2f}'.format(corr_num[0]), fontsize=fsize_legend, bbox=props)
+    ax.text(0.01,
+            0.95,
+            'Correlation={:.2f}'.format(corr_num[0]),
+            fontsize=fsize_legend,
+            bbox=props)
 
     plt.plot(x_all, data_all[::], 'ko')
-    plt.savefig("{}/c30_beta_new_tsne.pdf".format(save_folder),format = 'pdf', bbox_inches='tight',dpi=300, pad_inches = 0)
+    plt.savefig("{}/c30_beta_new_tsne.pdf".format(save_folder),
+                format='pdf',
+                bbox_inches='tight',
+                dpi=300,
+                pad_inches=0)
