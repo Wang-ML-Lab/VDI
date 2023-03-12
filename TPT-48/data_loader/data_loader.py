@@ -27,10 +27,6 @@ class WeatherDataLoader():
              for state in self.all_states]) - self.group_len + 1
         self.all_mean, self.all_std = self.__norm__()
 
-        # if self.opt.bound_prediction:
-        #     self.max, self.min = self.__maxmin__()
-        #     self.norm_max, self.norm_min = (self.max - self.all_mean) / self.all_std, (self.min - self.all_mean) / self.all_std
-
         self.train_datasets = [
             CovidTrainDataset(self.raw_data[state],
                               isSrc=(state in self.src_domain),
@@ -48,7 +44,6 @@ class WeatherDataLoader():
                              domain_idx=self.opt.state2num[state],
                              opt=opt) for state in self.all_states
         ]
-
 
         self.train_data_loader = [
             DataLoader(dataset, batch_size=opt.batch_size, shuffle=opt.shuffle)
