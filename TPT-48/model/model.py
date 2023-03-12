@@ -136,7 +136,7 @@ class BaseModel(nn.Module):
         sample_number = dataloader.test_datasets[0].__len__()
 
         all_loss = np.zeros(self.num_domain)
-        count = 0 # for all loss to average
+        count = 0  # for all loss to average
 
         # test seq save
         l_encode = []
@@ -149,7 +149,8 @@ class BaseModel(nn.Module):
             self.__set_input__(data, train=False)
 
             with torch.no_grad():
-                self.x_seq = torch.tensor(self.x_seq).to(self.device).float() # .double()
+                self.x_seq = torch.tensor(self.x_seq).to(
+                    self.device).float()  # .double()
                 self.__test_forward__()
                 l_encode.append(to_np(self.q_z_seq))
                 l_domain.append(self.domain_seq)
@@ -157,11 +158,11 @@ class BaseModel(nn.Module):
                 l_u_all.append(to_np(self.u_seq))
 
             np_f_seq = to_np(self.f_seq)
-            loss = (self.y_seq - np_f_seq) ** 2
+            loss = (self.y_seq - np_f_seq)**2
             # loss shape : Number of test domain x Batch size x test len (Predict Data dim = 6)
             # balanced loss
             # loss = loss.mean((1,2)) * self.tmp_batch_size / self.opt.batch_size
-            loss = loss.sum((1,2))
+            loss = loss.sum((1, 2))
             all_loss += loss
 
         all_loss /= sample_number
@@ -171,15 +172,10 @@ class BaseModel(nn.Module):
             self.opt.num_target)
 
         loss_msg = '[Test][{}] Loss: total average {:.6f}, test loss average {:.6f},  in each domain {}'.format(
-            self.epoch, 
-            all_loss.mean(),
-            test_loss_mean,
-            all_loss
-        )
+            self.epoch, all_loss.mean(), test_loss_mean, all_loss)
         self.__log_write__(loss_msg)
         if self.use_visdom:
             self.__vis_test_error__(test_loss_mean, 'test loss')
-
 
         e_all = np.concatenate(l_encode, axis=1)
         domain_all = np.concatenate(l_domain, axis=1)
@@ -193,8 +189,10 @@ class BaseModel(nn.Module):
         d_all['u'] = to_np(l_u / count)
         d_all['loss_msg'] = loss_msg
         d_all['beta'] = beta_all
-    
-        if (self.epoch+1) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
+
+        if (
+                self.epoch + 1
+        ) % self.opt.save_interval == 0 or self.epoch + 1 == self.opt.num_epoch:
             write_pickle(d_all, self.opt.outf + '/' + str(epoch) + '_pred.pkl')
 
         return all_loss.mean(), self.nan_flag
@@ -237,8 +235,10 @@ class BaseModel(nn.Module):
             idx_seq: Number of domain x Batch size x 1 (the order in the whole dataset)
             y_value_seq: Number of domain x Batch size x Predict Data dim
         """
-        x_seq, y_seq, idx_seq, domain_seq = [d[0][None, :, :] for d in data], [d[1][None, :] for d in data], [d[2][None, :] for d in data], [d[3][None, :] for d in data]
-        
+        x_seq, y_seq, idx_seq, domain_seq = [d[0][None, :, :] for d in data], [
+            d[1][None, :] for d in data
+        ], [d[2][None, :] for d in data], [d[3][None, :] for d in data]
+
         if train:
             self.x_seq = torch.cat(x_seq, 0).float().to(self.device)
             self.y_seq = torch.cat(y_seq, 0).float().to(self.device)
@@ -285,7 +285,7 @@ class BaseModel(nn.Module):
         else:
             self.tmp_beta_seq = self.generate_beta(self.u_seq)
             self.beta_seq, _ = self.netBeta(self.tmp_beta_seq,
-                                        self.tmp_beta_seq)
+                                            self.tmp_beta_seq)
 
         self.q_z_seq, self.q_z_mu_seq, self.q_z_log_var_seq, self.p_z_seq, self.p_z_mu_seq, self.p_z_log_var_seq, = self.netZ(
             self.x_seq, self.u_seq, self.beta_seq)
@@ -315,7 +315,7 @@ class BaseModel(nn.Module):
         # 1, belongs to one domain
         # 2, next to each other
         # as the pair that we want to concentrate them, and all the others will be cancel out
-        
+
         # the first 2 steps will generate matrix in this format:
         # [0, 1, 0, 0]
         # [0, 0, 1, 0]
@@ -324,7 +324,7 @@ class BaseModel(nn.Module):
         base_m = torch.diag(torch.ones(self.tmp_batch_size - 1),
                             diagonal=1).to(self.device)
         base_m[self.tmp_batch_size - 1, 0] = 1
-        
+
         # Then we generate the "complementary" matrix in this format:
         # [1, 0, 1, 1]
         # [1, 1, 0, 1]
@@ -562,7 +562,8 @@ class VDI(BaseModel):
         mu_beta = u_seq.mean(1).detach()
         mu_beta_mean = mu_beta.mean(0, keepdim=True)
         mu_beta_std = mu_beta.std(0, keepdim=True)
-        mu_beta_std = torch.maximum(mu_beta_std, torch.ones_like(mu_beta_std) * 1e-12)
+        mu_beta_std = torch.maximum(mu_beta_std,
+                                    torch.ones_like(mu_beta_std) * 1e-12)
         mu_beta = (mu_beta - mu_beta_mean) / mu_beta_std
         return mu_beta
 
@@ -570,15 +571,15 @@ class VDI(BaseModel):
         with torch.no_grad():
             A = torch.zeros(self.num_domain, self.num_domain)
             new_u = u_seq.detach()
-            # ~ Wasserstein Loss 
+            # ~ Wasserstein Loss
             loss = SamplesLoss(loss="sinkhorn", p=2, blur=.05)
             for i in range(self.num_domain):
                 for j in range(i + 1, self.num_domain):
                     A[i][j] = loss(new_u[i], new_u[j])
                     A[j][i] = A[i][j]
-            
+
             A_np = to_np(A)
-            bound = np.sort(A.flatten())[int(self.num_domain ** 2 * 1 / 4)]
+            bound = np.sort(A.flatten())[int(self.num_domain**2 * 1 / 4)]
             # generate self.A
             self.A = (A_np < bound)
 
@@ -588,7 +589,8 @@ class VDI(BaseModel):
             # new normalization:
             mu_beta_mean = mu_beta.mean(0, keepdim=True)
             mu_beta_std = mu_beta.std(0, keepdim=True)
-            mu_beta_std = torch.maximum(mu_beta_std, torch.ones_like(mu_beta_std) * 1e-12)
+            mu_beta_std = torch.maximum(mu_beta_std,
+                                        torch.ones_like(mu_beta_std) * 1e-12)
             mu_beta = (mu_beta - mu_beta_mean) / mu_beta_std
 
             return mu_beta
@@ -603,7 +605,7 @@ class VDI(BaseModel):
         # use L1 instead of L2
         return F.l1_loss(flat(d_seq),
                          flat(self.u_seq.detach()))  # , self.u_seq.mean(1)
-    
+
     def __loss_D_grda__(self, d_seq):
         # this is for GRDA
         A = self.A
@@ -674,7 +676,6 @@ class VDI(BaseModel):
 
         return choosen_node
 
-    
     def __rand_walk__(self, vis, left_nodes, A):
         # graph random sampling tool for grda loss
         chain_node = []

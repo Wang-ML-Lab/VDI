@@ -6,8 +6,14 @@ opt = EasyDict()
 opt.data_src = "train_data/data/month_temp_data.pkl"
 
 # N->S
-opt.src_domain = ['ND','VT','NH','ME', 'WA','MT','SD','MN','WI','MI','NY','MA','OR','ID','WY','NE','IA','IL', 'IN','OH', 'PA', 'NJ','CT','RI']
-opt.tgt_domain = ['GA', 'OK', 'NC', 'SC', 'LA', 'KY', 'UT', 'MS', 'FL', 'MO', 'MD', 'DE', 'CO', 'CA', 'TN', 'TX', 'KS', 'AZ', 'NV', 'AL', 'VA', 'AR', 'WV', 'NM']
+opt.src_domain = [
+    'ND', 'VT', 'NH', 'ME', 'WA', 'MT', 'SD', 'MN', 'WI', 'MI', 'NY', 'MA',
+    'OR', 'ID', 'WY', 'NE', 'IA', 'IL', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI'
+]
+opt.tgt_domain = [
+    'GA', 'OK', 'NC', 'SC', 'LA', 'KY', 'UT', 'MS', 'FL', 'MO', 'MD', 'DE',
+    'CO', 'CA', 'TN', 'TX', 'KS', 'AZ', 'NV', 'AL', 'VA', 'AR', 'WV', 'NM'
+]
 
 opt.all_domain = opt.src_domain + opt.tgt_domain
 opt.num_domain = len(opt.all_domain)
@@ -23,7 +29,7 @@ opt.all_domain_idx = opt.src_domain_idx + opt.tgt_domain_idx
 
 # wheather shuffle data
 opt.shuffle = True
-opt.d_loss_type = "DANN_loss" # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
+opt.d_loss_type = "DANN_loss"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
 opt.use_pretrain_R = True
 opt.pretrain_R_path = "pretrain_weight/netR_8_dann_tpt.pth"
 opt.pretrain_U_path = "pretrain_weight/netU_8_dann_tpt.pth"
@@ -43,12 +49,11 @@ opt.peak_lr_d = 3e-5
 opt.final_lr = 1e-8
 opt.warmup_steps = 20
 
-
 opt.seed = 2333
 opt.num_epoch = 500
 opt.batch_size = 16
 
-opt.use_visdom = False # True
+opt.use_visdom = False  # True
 opt.visdom_port = 2000
 tmp_time = localtime()
 opt.outf = "result_save/{}".format(strftime("%Y-%m-%d %H:%M:%S", tmp_time))
@@ -70,7 +75,7 @@ opt.seq_len = 6
 opt.input_dim = 6  # the dimension of input data x
 opt.group_len = 12
 
-opt.u_dim = 8      # the dimension of local domain index u
+opt.u_dim = 8  # the dimension of local domain index u
 opt.beta_dim = 2
 
 # for grda discriminator

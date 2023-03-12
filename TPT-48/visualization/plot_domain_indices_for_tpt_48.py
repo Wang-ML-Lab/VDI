@@ -22,7 +22,8 @@ def draw_2_div(data, num_domain):
     cmap = matplotlib.cm.get_cmap('rainbow')
     title_size = 20
     aspect_ratio = 0.75
-    long_latitude = pd.read_csv("visualization/usa_map/longitude-latitude-normalize.csv")
+    long_latitude = pd.read_csv(
+        "visualization/usa_map/longitude-latitude-normalize.csv")
 
     # first plot, Colors Indicate Latitude
     fig, ax = plt.subplots(1, 1, figsize=(6, 6 * 0.9))
@@ -33,13 +34,20 @@ def draw_2_div(data, num_domain):
         print("domain: {}".format(draw_label))
         x = data[i, 0]
         y = data[i, 1]
-        my_latitude = long_latitude.loc[long_latitude['state']==draw_label]['latitude']
-        ax.scatter(x, y,  color=cmap(my_latitude)[:3])
-        ax.annotate(str(draw_label), (x, y), xytext=(x,y), weight='bold')
-    ax.set_title("{} (Colors Indicate Latitude)".format(r"$\beta$"), y=1.0, pad = 11)
+        my_latitude = long_latitude.loc[long_latitude['state'] ==
+                                        draw_label]['latitude']
+        ax.scatter(x, y, color=cmap(my_latitude)[:3])
+        ax.annotate(str(draw_label), (x, y), xytext=(x, y), weight='bold')
+    ax.set_title("{} (Colors Indicate Latitude)".format(r"$\beta$"),
+                 y=1.0,
+                 pad=11)
     ax.title.set_size(title_size)
     ax.set_aspect(aspect_ratio)
-    plt.savefig("{}/{}_colors_indicate_latitude.pdf".format(save_folder, "Beta"),dpi=300,format='pdf' ,bbox_inches='tight') # 
+    plt.savefig("{}/{}_colors_indicate_latitude.pdf".format(
+        save_folder, "Beta"),
+                dpi=300,
+                format='pdf',
+                bbox_inches='tight')  #
     # plt.show()
     plt.clf()
 
@@ -51,15 +59,23 @@ def draw_2_div(data, num_domain):
         print("domain: {}".format(draw_label))
         x = data[i, 0]
         y = data[i, 1]
-        my_longitude = long_latitude.loc[long_latitude['state']==draw_label]['longitude']
-        ax.scatter(x, y,  color=cmap(my_longitude)[:3])
-        ax.annotate(str(draw_label), (x, y), xytext=(x,y), weight='bold')
-    ax.set_title("{} (Colors Indicate Longitude)".format(r"$\beta$"), y=1.0, pad = 11)
+        my_longitude = long_latitude.loc[long_latitude['state'] ==
+                                         draw_label]['longitude']
+        ax.scatter(x, y, color=cmap(my_longitude)[:3])
+        ax.annotate(str(draw_label), (x, y), xytext=(x, y), weight='bold')
+    ax.set_title("{} (Colors Indicate Longitude)".format(r"$\beta$"),
+                 y=1.0,
+                 pad=11)
     ax.title.set_size(title_size)
     ax.set_aspect(aspect_ratio)
-    plt.savefig("{}/{}_colors_indicate_longitude.pdf".format(save_folder, "Beta"),bbox_inches='tight',dpi=300,format='pdf')
+    plt.savefig("{}/{}_colors_indicate_longitude.pdf".format(
+        save_folder, "Beta"),
+                bbox_inches='tight',
+                dpi=300,
+                format='pdf')
     # plt.show()
     plt.clf()
+
 
 if __name__ == "__main__":
     result = sys.argv[1]
