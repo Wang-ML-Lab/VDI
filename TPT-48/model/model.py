@@ -301,10 +301,6 @@ class BaseModel(nn.Module):
             loss_value['U_concentrate'], loss_value['R'], loss_value['U_beta_R'], loss_value['P_beta_alpha'] \
                 = self.__optimize_DUZF__()
 
-        # if self.opt.wgan:
-        #     clamp_range = 2.0
-        #     for p in self.netD.parameters():
-        #         p.data.clamp_(-clamp_range, clamp_range)
         return loss_value
 
     def contrastive_loss(self, u_con_seq, temperature=1):
