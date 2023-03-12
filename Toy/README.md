@@ -21,7 +21,7 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
     python main.py --config config_Circle
 
 ### Visualization of Circle's Domain Indices
-1. Train the VDI on Circle dataset
+1. Train the VDI on Circle dataset.
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_circle_indices.py":
 ```python
 dates = "2023-03-10" # filling your own dates for experiments
