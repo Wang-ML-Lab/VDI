@@ -11,7 +11,7 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 * [Domain Index Definition (Informal)](#domain-index-definition-informal-see-formal-definition-in-the-paper)
 * [Method Overview](#method-overview)
 * [Installation](#installation)
-* [Code Implementation](#code-implementation)
+* [Code for Different Datasets](#code-for-different-datasets)
 * [Quantitative Result](#quantitative-result)
 * [More Visualization of Inferred Domain Indices](#more-visualization-of-inferred-domain-indices)
 * [Related Works](#also-check-our-relevant-work)
@@ -53,7 +53,7 @@ conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
 pip install -r requirements.txt
 ```
 
-## Code Implementation
+## Code for Different Datasets
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
 * [Experiments on Toy Datasets: Circle, DG-15 and DG-60](Toy)
 * [Experiments on TPT-48](TPT-48)
