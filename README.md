@@ -47,13 +47,13 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 
 ## Code Implementation
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
-* Experiments on Toy Dataset: Circle, DG-15 and DG-60
+* Experiments on Toy Datasets: Circle, DG-15 and DG-60
 * Experiments on TPT-48
 * Experiments on CompCars
 
 
 ## Quantitative Result
-#### Toy Dataset: Circle, DG-15 and DG-60
+#### Toy Datasets: Circle, DG-15 and DG-60
 <p align="center">
 <img src="fig/toy_quantitive_result.jpg" alt="" data-canonical-src="fig/toy_quantitive_result.jpg" width="80%"/>
 </p>
