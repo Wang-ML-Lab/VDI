@@ -10,10 +10,10 @@ Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 * [Sample Visualization of Inferred Domain Indices](#sample-visualization-of-inferred-domain-indices)
 * [Domain Index Definition (Informal)](#domain-index-definition-informal-see-formal-definition-in-the-paper)
 * [Method Overview](#method-overview)
+* [Installation](#installation)
 * [Code Implementation](#code-implementation)
 * [Quantitative Result](#quantitative-result)
 * [More Visualization of Inferred Domain Indices](#more-visualization-of-inferred-domain-indices)
-* [Installation](#installation)
 * [Related Works](#also-check-our-relevant-work)
 * [Reference](#reference)
 
@@ -44,6 +44,14 @@ Our theortical analysis found that **maximizing our model's evidence lower bound
 <p align="center">
 <img src="fig/network_structure.jpg" alt="" data-canonical-src="fig/network_structure.jpg" width="89%"/>
 </p>
+
+## Installation
+```python
+conda create -n VDI python=3.8
+conda activate VDI
+conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
+pip install -r requirements.txt
+```
 
 ## Code Implementation
 In the directory of each dataset, there are detailed steps on how to train VDI and how to visualize the inferred domain indices.
@@ -94,14 +102,6 @@ Inferred domain indices for 30 domains in *CompCars*. We color inferred domain i
 <img src="fig/visualize_compcar_YOM.jpg" alt="" data-canonical-src="fig/visualize_compcar_YOM.jpg width="35%"/>
 </p>     -->
 
-
-## Installation
-```python
-conda create -n VDI python=3.8
-conda activate VDI
-conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
-pip install -r requirements.txt
-```
 
 ## Also Check Our Relevant Work
 <span id="paper_1">[1] **Graph-Relational Domain Adaptation**<br></span>
