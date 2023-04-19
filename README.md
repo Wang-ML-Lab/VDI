@@ -3,7 +3,7 @@ This repo contains the code for our ICLR 2023 paper (Spotlight):<br>
 **Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation**<br>
 Zihao Xu*, Guang-Yuan Hao*, Hao He, Hao Wang<br>
 *Eleventh International Conference on Learning Representations, 2023*<br>
-[[Paper](https://arxiv.org/abs/2302.02561)]
+[[Paper](https://arxiv.org/abs/2302.02561)][[Youtube](https://www.youtube.com/watch?v=xARD4VG19ec)][[Bilibili](https://www.bilibili.com/video/BV13N411w734/?vd_source=38c48d8008e903abbc6aa45a5cc63d8f)]
 
 ## Outline for This README
 * [Brief Introduction for VDI](#brief-introduction-for-vdi)
