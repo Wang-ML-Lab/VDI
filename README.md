@@ -112,7 +112,7 @@ Zihao Xu, Hao He, Guang-He Lee, Yuyang Wang, Hao Wang<br>
 <span id="paper_2">[2] **Continuously Indexed Domain Adaptation**<br></span>
 Hao Wang*, Hao He*, Dina Katabi<br>
 *Thirty-Seventh International Conference on Machine Learning (ICML), 2020*<br>
-[[Paper](http://wanghao.in/paper/ICML20_CIDA.pdf)] [[Code](https://github.com/hehaodele/CIDA)] [[Talk](https://www.youtube.com/watch?v=KtZPSCD-WhQ)] [[Blog](http://wanghao.in/CIDA-Blog/CIDA.html)] [[Slides](http://wanghao.in/slides/CIDA_slides.pptx)]
+[[Paper](http://wanghao.in/paper/ICML20_CIDA.pdf)] [[Code](https://github.com/hehaodele/CIDA)] [[Talk](https://www.youtube.com/watch?v=KtZPSCD-WhQ)] [[Blog](http://wanghao.in/CIDA-Blog/CIDA.html)] [[Slides](http://wanghao.in/slides/CIDA_slides.pptx)] [[Website]](http://cida.csail.mit.edu/)
 
 ## Reference
 [Domain-Indexing Variational Bayes: Interpretable Domain Index for Domain Adaptation](https://arxiv.org/abs/2302.02561)
