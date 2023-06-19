@@ -14,7 +14,7 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
 2. Run the following code:
 ```python
     python inference.py -c config_DG_15_inference (or)
-    python main.py --config config_DG_15_inference
+    python inference.py --config config_DG_15_inference
 ```
 It will also produce the result in "result_save" folder.
 
@@ -27,7 +27,7 @@ It will also produce the result in "result_save" folder.
 2. Run the following code:
 ```python
     python inference.py -c config_DG_60_inference (or)
-    python main.py --config config_DG_60_inference
+    python inference.py --config config_DG_60_inference
 ```
 It will also produce the result in "result_save" folder.
 
@@ -40,7 +40,7 @@ It will also produce the result in "result_save" folder.
 2. Run the following code:
 ```python
     python inference.py -c config_Circle_inference (or)
-    python main.py --config config_Circle_inference
+    python inference.py --config config_Circle_inference
 ```
 It will also produce the result in "result_save" folder, and you can use the result to do visualization.
 
