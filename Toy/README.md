@@ -12,8 +12,10 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
 ### How to Use the Pretrained Model to Do Inference
 1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
 2. Run the following code:
+```python
     python inference.py -c config_DG_15_inference (or)
     python main.py --config config_DG_15_inference
+```
 It will also produce the result in "result_save" folder.
 
 ## DG-60
@@ -23,8 +25,10 @@ It will also produce the result in "result_save" folder.
 ### How to Use the Pretrained Model to Do Inference
 1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
 2. Run the following code:
+```python
     python inference.py -c config_DG_60_inference (or)
     python main.py --config config_DG_60_inference
+```
 It will also produce the result in "result_save" folder.
 
 ## Circle
@@ -34,8 +38,10 @@ It will also produce the result in "result_save" folder.
 ### How to Use the Pretrained Model to Do Inference
 1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
 2. Run the following code:
+```python
     python inference.py -c config_Circle_inference (or)
     python main.py --config config_Circle_inference
+```
 It will also produce the result in "result_save" folder, and you can use the result to do visualization.
 
 ### Visualization of Circle's Domain Indices
