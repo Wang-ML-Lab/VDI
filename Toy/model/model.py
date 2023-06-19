@@ -206,6 +206,9 @@ class BaseModel(nn.Module):
 
         return test_acc, self.nan_flag
 
+    def inference(self, dataloader):
+        self.test(epoch=self.opt.num_epoch-1, dataloader=dataloader)
+
     def my_cat(self, new_u_seq):
         # concatenation of local domain index u
         st = new_u_seq[0]
@@ -228,10 +231,13 @@ class BaseModel(nn.Module):
 
     def save(self):
         torch.save(self.netU.state_dict(), self.outf + '/netU.pth')
+        torch.save(self.netUCon.state_dict(), self.outf + '/netUCon.pth')
         torch.save(self.netZ.state_dict(), self.outf + '/netZ.pth')
         torch.save(self.netF.state_dict(), self.outf + '/netF.pth')
         torch.save(self.netR.state_dict(), self.outf + '/netR.pth')
         torch.save(self.netD.state_dict(), self.outf + '/netD.pth')
+        torch.save(self.netBeta.state_dict(), self.outf + '/netBeta.pth')
+        torch.save(self.netBeta2U.state_dict(), self.outf + '/netBeta2U.pth')
 
     def __set_input__(self, data, train=True):
         # :param
@@ -386,7 +392,13 @@ class BaseModel(nn.Module):
         # E_q[log p(\beta|\alpha)]
         # assuming alpha mean = 0
         var_beta = torch.exp(self.beta_log_var_seq)
+        # To reproduce the exact result of our experiment, use the following line to replace the loss_beta_alpha:
         loss_beta_alpha = -torch.mean((var_beta**2).sum(dim=1))
+        # Actually the previous line is wrong because based on our formula, it should be var_beta, not var_beta**2.
+        # However, all our parameter tunning is based on the previous one. Thus, to ensure that you can reproduce our results, please use the previous line.
+        # The correct line should be: 
+        # loss_beta_alpha = -torch.mean(var_beta.sum(dim=1))
+        # Uncomment the previous line to use the correct formula.
 
         # loss for u and beta
         # log p(u|beta)
@@ -513,6 +525,16 @@ class VDI(BaseModel):
 
             self.netU.load_state_dict(pretrain_model_U)
             self.netR.load_state_dict(pretrain_model_R)
+
+        if self.opt.use_pretrain_model_all:
+            self.netU.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netU.pth'))
+            self.netUCon.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netUCon.pth'))
+            self.netZ.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netZ.pth'))
+            self.netF.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netF.pth'))
+            self.netR.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netR.pth'))
+            self.netD.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netD.pth'))
+            self.netBeta.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netBeta.pth'))
+            self.netBeta2U.load_state_dict(torch.load(self.opt.pretrain_model_all_path + '/netBeta2U.pth'))
 
         if self.opt.fix_u_r:
             UZF_parameters = list(self.netZ.parameters()) + list(

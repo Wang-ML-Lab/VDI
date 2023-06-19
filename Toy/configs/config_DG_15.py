@@ -20,6 +20,8 @@ opt.pretrain_R_path = "data/netR_4_dann.pth"
 opt.pretrain_U_path = "data/netU_4_dann.pth"
 opt.fix_u_r = False
 
+opt.use_pretrain_model_all = False
+
 opt.lambda_gan = 0.6
 opt.lambda_reconstruct = 10
 opt.lambda_u_concentrate = 1

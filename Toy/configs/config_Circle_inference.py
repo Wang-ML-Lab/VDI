@@ -22,7 +22,9 @@ opt.use_pretrain_R = False
 # opt.pretrain_R_path =  "data/netR_1_c30.pth" # "data/netR_2_dann.pth" # "data/netR_4_dann.pth"
 # opt.pretrain_U_path = "data/netU_1_c30.pth" # "data/netU_2_dann.pth" # "data/netU_4_dann.pth"
 opt.fix_u_r = False
-opt.use_pretrain_model_all = False
+
+opt.use_pretrain_model_all = True
+opt.pretrain_model_all_path = "pretrained_weight/Circle"
 
 opt.d_loss_type = "DANN_loss_mean"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss"
 

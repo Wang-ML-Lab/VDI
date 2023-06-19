@@ -245,6 +245,13 @@ class BaseModel(nn.Module):
         torch.save(self.netR.state_dict(), self.outf + '/netR.pth')
         torch.save(self.netD.state_dict(), self.outf + '/netD.pth')
 
+    def load_all(self):
+        self.netU.load_state_dict(torch.load(self.pretrain_all_path + '/netU.pth'))
+        self.netZ.load_state_dict(torch.load(self.pretrain_all_path + '/netZ.pth'))
+        self.netF.load_state_dict(torch.load(self.pretrain_all_path + '/netF.pth'))
+        self.netR.load_state_dict(torch.load(self.pretrain_all_path + '/netR.pth'))
+        self.netD.load_state_dict(torch.load(self.pretrain_all_path + '/netD.pth'))
+
     def __set_input__(self, data, train=True):
         """
         :param
@@ -401,7 +408,13 @@ class BaseModel(nn.Module):
         # E_q[log p(\beta|\alpha)]
         # assuming alpha mean = 0
         var_beta = torch.exp(self.beta_log_var_seq)
+        # To reproduce the exact result of our experiment, use the following line to replace the loss_beta_alpha:
         loss_beta_alpha = -torch.mean((var_beta**2).sum(dim=1))
+        # Actually the previous line is wrong because based on our formula, it should be var_beta, not var_beta**2.
+        # However, all our parameter tunning is based on the previous one. Thus, to ensure that you can reproduce our results, please use the previous line.
+        # The correct line should be: 
+        # loss_beta_alpha = -torch.mean(var_beta.sum(dim=1))
+        # Uncomment the previous line to use the correct formula.
 
         # loss for u and beta
         # log p(u|beta)

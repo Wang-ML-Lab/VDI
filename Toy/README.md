@@ -9,19 +9,37 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
 ### How to Train on DG-15
     python main.py -c config_DG_15 (or)
     python main.py --config config_DG_15
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
+2. Run the following code:
+    python inference.py -c config_DG_15_inference (or)
+    python main.py --config config_DG_15_inference
+It will also produce the result in "result_save" folder.
 
 ## DG-60
 ### How to Train on DG-60
     python main.py -c config_DG_60 (or)
     python main.py --config config_DG_60
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
+2. Run the following code:
+    python inference.py -c config_DG_60_inference (or)
+    python main.py --config config_DG_60_inference
+It will also produce the result in "result_save" folder.
 
 ## Circle
 ### How to Train on Circle
     python main.py -c config_Circle (or)
     python main.py --config config_Circle
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
+2. Run the following code:
+    python inference.py -c config_Circle_inference (or)
+    python main.py --config config_Circle_inference
+It will also produce the result in "result_save" folder, and you can use the result to do visualization.
 
 ### Visualization of Circle's Domain Indices
-1. Train the VDI on Circle dataset.
+1. Train/inference the VDI on Circle dataset.
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_circle_indices.py":
 ```python
 dates = "2023-03-10" # filling your own dates for experiments
