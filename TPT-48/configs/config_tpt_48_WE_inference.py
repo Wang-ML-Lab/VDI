@@ -5,14 +5,13 @@ opt = EasyDict()
 
 opt.data_src = "train_data/data/month_temp_data.pkl"
 
-# N->S
-opt.src_domain = [
-    'ND', 'VT', 'NH', 'ME', 'WA', 'MT', 'SD', 'MN', 'WI', 'MI', 'NY', 'MA',
-    'OR', 'ID', 'WY', 'NE', 'IA', 'IL', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI'
-]
+# W (less) -> E
+opt.src_domain = ['WA', 'OR', 'CA', 'ID', 'NV', 'AZ']
 opt.tgt_domain = [
-    'GA', 'OK', 'NC', 'SC', 'LA', 'KY', 'UT', 'MS', 'FL', 'MO', 'MD', 'DE',
-    'CO', 'CA', 'TN', 'TX', 'KS', 'AZ', 'NV', 'AL', 'VA', 'AR', 'WV', 'NM'
+    'OH', 'IN', 'MI', 'VT', 'NH', 'ME', 'NY', 'MA', 'PA', 'NJ', 'CT', 'RI',
+    'WV', 'MD', 'DE', 'KY', 'VA', 'TN', 'AL', 'GA', 'NC', 'FL', 'SC', 'MO',
+    'SD', 'UT', 'AR', 'KS', 'MT', 'NM', 'IA', 'WY', 'CO', 'TX', 'LA', 'MN',
+    'OK', 'IL', 'WI', 'ND', 'MS', 'NE'
 ]
 
 opt.all_domain = opt.src_domain + opt.tgt_domain
@@ -29,17 +28,19 @@ opt.all_domain_idx = opt.src_domain_idx + opt.tgt_domain_idx
 
 # wheather shuffle data
 opt.shuffle = True
-opt.d_loss_type = "DANN_loss"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
-opt.use_pretrain_R = True
-opt.pretrain_R_path = "pretrain_weight/netR_8_dann_tpt.pth"
-opt.pretrain_U_path = "pretrain_weight/netU_8_dann_tpt.pth"
+opt.d_loss_type = "DANN_loss"  # "GRDA_loss" # "CIDA_loss" # "DANN_loss_mean"
 
-opt.use_pretrain_model_all = False
+opt.use_pretrain_R = False
+# opt.pretrain_R_path = "pretrain_weight/netR_8_dann_less_WE.pth"
+# opt.pretrain_U_path = "pretrain_weight/netU_8_dann_less_WE.pth"
+
+opt.use_pretrain_model_all = True
+opt.pretrain_model_all_path = "pretrain_weight/TPT_48_WE"
 
 opt.fix_u_r = False
 
-opt.lambda_gan = 0.3
-opt.lambda_reconstruct = 10
+opt.lambda_gan = 0.4
+opt.lambda_reconstruct = 500
 opt.lambda_u_concentrate = 0.8
 opt.lambda_beta = 0.8
 opt.lambda_beta_alpha = 0.6
@@ -51,7 +52,7 @@ opt.peak_lr_d = 3e-5
 opt.final_lr = 1e-8
 opt.warmup_steps = 20
 
-opt.seed = 2333
+opt.seed = 1
 opt.num_epoch = 500
 opt.batch_size = 16
 
@@ -64,7 +65,7 @@ opt.save_interval = 100
 opt.test_interval = 20
 
 opt.device = "cuda"
-opt.gpu_device = "1"
+opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4

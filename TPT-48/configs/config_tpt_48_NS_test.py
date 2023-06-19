@@ -29,19 +29,18 @@ opt.all_domain_idx = opt.src_domain_idx + opt.tgt_domain_idx
 
 # wheather shuffle data
 opt.shuffle = True
-opt.d_loss_type = "DANN_loss"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
-opt.use_pretrain_R = True
+opt.d_loss_type = "DANN_loss_mean"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
+opt.use_pretrain_R = False
 opt.pretrain_R_path = "pretrain_weight/netR_8_dann_tpt.pth"
 opt.pretrain_U_path = "pretrain_weight/netU_8_dann_tpt.pth"
-
-opt.use_pretrain_model_all = False
 
 opt.fix_u_r = False
 
 opt.lambda_gan = 0.3
-opt.lambda_reconstruct = 10
+opt.lambda_reconstruct = 500
 opt.lambda_u_concentrate = 0.8
 opt.lambda_beta = 0.8
+
 opt.lambda_beta_alpha = 0.6
 
 # for warm up
@@ -64,7 +63,7 @@ opt.save_interval = 100
 opt.test_interval = 20
 
 opt.device = "cuda"
-opt.gpu_device = "1"
+opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4
@@ -77,7 +76,7 @@ opt.seq_len = 6
 opt.input_dim = 6  # the dimension of input data x
 opt.group_len = 12
 
-opt.u_dim = 8  # the dimension of local domain index u
+opt.u_dim = 2  # the dimension of local domain index u
 opt.beta_dim = 2
 
 # for grda discriminator

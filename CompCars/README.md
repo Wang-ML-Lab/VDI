@@ -8,9 +8,17 @@ In order to eliminate the influence of imbalanced labels, we ensure that each do
 ## How to Train on CompCars
     python main.py -c config_CompCars (or)
     python main.py --config config_config_CompCars
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrained_weight".
+2. Run the following code:
+```python
+    python inference.py -c config_CompCars_inference (or)
+    python inference.py --config config_CompCars_inference
+```
+Both training/inference will produce the result in "result_save" folder, and you can use the result to do visualization.
 
 ## Visualization of CompCars' Domain Indices
-1. Train the VDI on CompCars dataset.
+1. Train/inference the VDI on CompCars dataset.
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_circle_indices.py":
 ```python
 dates = "2023-03-11" # filling your own dates for experiments

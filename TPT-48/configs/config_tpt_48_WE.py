@@ -33,6 +33,8 @@ opt.d_loss_type = "DANN_loss"  # "GRDA_loss" # "CIDA_loss" # "DANN_loss_mean"
 opt.use_pretrain_R = False
 # opt.pretrain_R_path = "pretrain_weight/netR_8_dann_less_WE.pth"
 # opt.pretrain_U_path = "pretrain_weight/netU_8_dann_less_WE.pth"
+opt.use_pretrain_model_all = False
+
 opt.fix_u_r = False
 
 opt.lambda_gan = 0.4
@@ -61,7 +63,7 @@ opt.save_interval = 100
 opt.test_interval = 20
 
 opt.device = "cuda"
-opt.gpu_device = "0"
+opt.gpu_device = "2"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4

@@ -9,14 +9,31 @@ We approximate the Earth Moving distance with [Sinkhorn Loss](https://audeg.gith
 ### How to Train for task W $\rightarrow$ E on TPT-48
     python main.py -c config_TPT_48_WE (or)
     python main.py --config config_TPT_48_WE
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrain_weight".
+2. Run the following code:
+```python
+    python inference.py -c config_TPT_48_WE_inference (or)
+    python inference.py --config config_TPT_48_WE_inference
+```
+Both training/inference will produce the result in "result_save" folder, and you can use the result to do visualization.
 
 ## N $\rightarrow$ S
 ### How to Train for task N $\rightarrow$ S on TPT-48
     python main.py -c config_TPT_48_NS (or)
     python main.py --config config_TPT_48_NS
+### How to Use the Pretrained Model to Do Inference
+1. Download the weight from [here](https://drive.google.com/drive/folders/1TNkak042AsGHJQ9hoQKOzubU43YQlXDg?usp=sharing) and unzip under the folder "pretrain_weight".
+2. Run the following code:
+```python
+    python inference.py -c config_TPT_48_NS_inference (or)
+    python inference.py --config config_TPT_48_NS_inference
+```
+Both training/inference will produce the result in "result_save" folder, and you can use the result to do visualization.
+
 
 ### Visualization of TPT-48's Domain Indices
-1. Train the VDI on TPT-48 with either "W $\rightarrow$ E" or "N $\rightarrow$ S" task.
+1. Train/inference the VDI on TPT-48 with either "W $\rightarrow$ E" or "N $\rightarrow$ S" task.
 2. Check your result in "result_save" folder, and then change the first 2 lines in "visualize_tpt_48_indices.py":
 ```python
 dates = "2023-03-11" # filling your own dates for experiments

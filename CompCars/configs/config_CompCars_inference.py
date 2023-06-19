@@ -22,7 +22,9 @@ opt.use_pretrain_R = False
 # opt.pretrain_R_path = "data/netR_8_434.pth"
 # opt.pretrain_U_path = "data/netU_8_434.pth"
 opt.fix_u_r = False
-opt.use_pretrain_model_all = False
+
+opt.use_pretrain_model_all = True
+opt.pretrain_model_all_path = "pretrained_weight/CompCars"
 
 opt.d_loss_type = "ADDA_loss"  # "DANN_loss_mean" # "CIDA_loss" # "GRDA_loss" # "DANN_loss"
 
@@ -51,7 +53,7 @@ opt.save_interval = 100
 opt.test_interval = 20
 
 opt.device = "cuda"
-opt.gpu_device = "5"
+opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4

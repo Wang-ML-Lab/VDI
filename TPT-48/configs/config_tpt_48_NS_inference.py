@@ -30,11 +30,11 @@ opt.all_domain_idx = opt.src_domain_idx + opt.tgt_domain_idx
 # wheather shuffle data
 opt.shuffle = True
 opt.d_loss_type = "DANN_loss"  # "CIDA_loss" # "GRDA_loss" # "DANN_loss_mean"
-opt.use_pretrain_R = True
-opt.pretrain_R_path = "pretrain_weight/netR_8_dann_tpt.pth"
-opt.pretrain_U_path = "pretrain_weight/netU_8_dann_tpt.pth"
-
-opt.use_pretrain_model_all = False
+opt.use_pretrain_R = False
+# opt.pretrain_R_path = "pretrain_weight/netR_8_dann_tpt.pth"
+# opt.pretrain_U_path = "pretrain_weight/netU_8_dann_tpt.pth"
+opt.use_pretrain_model_all = True
+opt.pretrain_model_all_path = "pretrain_weight/TPT_48_NS"
 
 opt.fix_u_r = False
 
@@ -64,7 +64,7 @@ opt.save_interval = 100
 opt.test_interval = 20
 
 opt.device = "cuda"
-opt.gpu_device = "1"
+opt.gpu_device = "0"
 opt.gamma = 100
 opt.beta1 = 0.9
 opt.weight_decay = 5e-4

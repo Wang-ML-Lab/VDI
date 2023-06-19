@@ -16,7 +16,7 @@ Notice that we have pretrained the network of q(u|x) and p(x|u) and we included 
     python inference.py -c config_DG_15_inference (or)
     python inference.py --config config_DG_15_inference
 ```
-It will also produce the result in "result_save" folder.
+Both training/inference will produce the result in "result_save" folder.
 
 ## DG-60
 ### How to Train on DG-60
@@ -29,7 +29,7 @@ It will also produce the result in "result_save" folder.
     python inference.py -c config_DG_60_inference (or)
     python inference.py --config config_DG_60_inference
 ```
-It will also produce the result in "result_save" folder.
+Both training/inference will produce the result in "result_save" folder.
 
 ## Circle
 ### How to Train on Circle
@@ -42,7 +42,7 @@ It will also produce the result in "result_save" folder.
     python inference.py -c config_Circle_inference (or)
     python inference.py --config config_Circle_inference
 ```
-It will also produce the result in "result_save" folder, and you can use the result to do visualization.
+Both training/inference will produce the result in "result_save" folder, and you can use the result to do visualization.
 
 ### Visualization of Circle's Domain Indices
 1. Train/inference the VDI on Circle dataset.
