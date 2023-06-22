@@ -3,3 +3,10 @@ TPT-48/result_save/
 CompCars/result_save/
 *.pyc
 Toy/pretrained_weight/
+CompCars/pretrained_weight/
+TPT_48/pretrain_weight/
+TPT-48/configs/config_NS_new_test.py
+TPT-48/configs/config_tpt_48_NS.py
+TPT-48/configs/config_tpt_48_NS.py
+TPT-48/pretrain_weight/TPT_48_NS/
+TPT-48/configs/config_tpt_48_NS.py
