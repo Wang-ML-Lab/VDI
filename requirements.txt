@@ -1,8 +1,8 @@
-pandas
-networkx
-matplotlib
-visdom
-easydict
-POT
-geomloss
-scikit-learn
+pandas==1.4.2
+networkx==2.8.3
+matplotlib==3.5.2
+visdom==0.1.8.9
+easydict==1.9
+POT==0.8.2
+geomloss==0.2.5
+scikit-learn==1.1.1
